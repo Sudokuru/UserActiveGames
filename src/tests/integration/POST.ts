@@ -47,7 +47,7 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        // todo fix
+        // todo fix add numWrongCellsPlayedPerStrategy
         it('Post ActivePuzzle1 and ActivePuzzle2 returns 200 and expected response', function (done) {
             request
                 .post('/api/v1/user/activeGames')
@@ -86,7 +86,7 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        // todo fix
+        // todo fix, disallow duplicate puzzles
         it('Post duplicate activePuzzle returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
