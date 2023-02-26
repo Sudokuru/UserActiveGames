@@ -1,6 +1,6 @@
 let request = require('supertest');
 require('dotenv').config();
-import {ErrorMessage400, ErrorMessage401} from "./testData";
+import {activePuzzle1, activePuzzle1Response, ErrorMessage400, ErrorMessage401} from "./testData";
 
 const preRequest = request('https://' + process.env.AUTH0_BASE_URL);
 request = request('http://localhost:3001');
@@ -23,6 +23,26 @@ before(function (done) {
 });
 
 describe('Test POST requests for /api/v1/user/activeGames', function () {
+    describe('Test code 200 POST requests', function () {
+        it('ActivePuzzle1 returns 200 and expected response', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([activePuzzle1])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect(function(res) {
+                    res.body[0]._id = "ID";
+                    res.body[0].moves[0]._id = "ID";
+                })
+                .expect('Content-Type', /json/)
+                .expect(201, [activePuzzle1Response])
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+    });
+
     describe('Test code 400 POST requests', function () {
         it('Post empty body returns 400 error message', function (done) {
             request
@@ -43,7 +63,7 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
         it('Post no Auth header returns 401 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
-                .send()
+                .send([activePuzzle1])
                 .set('Content-Type', 'application/json')
                 .expect('Content-Type', /json/)
                 .expect(401, ErrorMessage401)
@@ -56,7 +76,7 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
         it('Post invalid Auth header returns 401 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
-                .send()
+                .send([activePuzzle1])
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer')
                 .expect('Content-Type', /json/)
@@ -71,7 +91,7 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
         it('Post expired Auth header returns 401 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
-                .send()
+                .send([activePuzzle1])
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer')
                 .expect('Content-Type', /json/)
