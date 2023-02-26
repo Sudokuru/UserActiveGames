@@ -1,6 +1,6 @@
 let request = require('supertest');
 require('dotenv').config();
-import {activePuzzle1, activePuzzle1Response, ErrorMessage400, ErrorMessage401} from "./testData";
+import {activePuzzle1, activePuzzle1Response, ErrorMessage400, ErrorMessage401, expiredAccessToken} from "./testData";
 
 const preRequest = request('https://' + process.env.AUTH0_BASE_URL);
 request = request('http://localhost:3001');
@@ -15,6 +15,7 @@ before(function (done) {
         .set('Accept', 'application/json')
         .expect(function(res) {
             token = res.body.access_token;
+            console.log(token);
         })
         .end(function(err, res) {
             if (err) return done(err);
@@ -87,13 +88,13 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        // todo
-        it('Post expired Auth header returns 401 error message', function (done) {
+        // todo wait 2 hours for token to expire
+        it('Post expired Auth token returns 401 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
                 .send([activePuzzle1])
                 .set('Content-Type', 'application/json')
-                .set('Authorization', 'Bearer')
+                .set('Authorization', 'Bearer ' + expiredAccessToken)
                 .expect('Content-Type', /json/)
                 .expect(401, ErrorMessage401)
                 .end(function(err, res) {
