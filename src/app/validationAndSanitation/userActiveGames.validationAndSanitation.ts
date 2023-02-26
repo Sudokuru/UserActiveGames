@@ -16,6 +16,7 @@ import {body, query} from "express-validator";
  * The astricks are required because we are accessing values from an array
  */
 exports.validateUserActiveGamesBodyPOST = [
+    body().isArray().withMessage('body is not an array'),
     body('*.userID', 'userID did not match correct format'),
     body('*.puzzle', 'puzzle did not match whitelist').whitelist("0123456789"),
     body('*.puzzle', 'puzzle is not of correct length').isLength({ min: 81, max: 81 }),
