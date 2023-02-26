@@ -21,7 +21,7 @@ mongoose.set({ debug: true, autoCreate: true})
  */
 const userActiveGamesSchema = new Schema<userActiveGames>({
     userID: { type: String, required: true, unique: false },
-    puzzle: { type: String, required: true },
+    puzzle: { type: String, required: true, unique: true },
     currentTime: { type: Number, required: true },
     moves: [{
         puzzleCurrentState: { type: String, required: true, unique: false },

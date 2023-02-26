@@ -1,6 +1,8 @@
 let request = require('supertest');
 require('dotenv').config();
-import {activePuzzle1, activePuzzle1Response, ErrorMessage400, ErrorMessage401, expiredAccessToken} from "./testData";
+import {
+    testData
+} from "./testData";
 
 const preRequest = request('https://' + process.env.AUTH0_BASE_URL);
 request = request('http://localhost:3001');
@@ -20,14 +22,17 @@ before(function (done) {
             if (err) return done(err);
             return done();
         });
+
+    // request
+    //     .delete('/api/v1/user/activeGames')
 });
 
 describe('Test POST requests for /api/v1/user/activeGames', function () {
     describe('Test code 200 POST requests', function () {
-        it('ActivePuzzle1 returns 200 and expected response', function (done) {
+        it('Post ActivePuzzle1 returns 200 and expected response', function (done) {
             request
                 .post('/api/v1/user/activeGames')
-                .send([activePuzzle1])
+                .send([testData.activePuzzle1])
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect(function(res) {
@@ -35,7 +40,30 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
                     res.body[0].moves[0]._id = "ID";
                 })
                 .expect('Content-Type', /json/)
-                .expect(201, [activePuzzle1Response])
+                .expect(201, [testData.activePuzzle1Response])
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        // todo fix
+        it('Post ActivePuzzle1 and ActivePuzzle2 returns 200 and expected response', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.activePuzzle1, testData.activePuzzle2])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect(function(res) {
+                    res.body[0]._id = "ID";
+                    res.body[0].moves[0]._id = "ID";
+
+                    res.body[1]._id = "ID";
+                    res.body[1].moves[0]._id = "ID";
+                    res.body[1].moves[1]._id = "ID";
+                })
+                .expect('Content-Type', /json/)
+                .expect(201, [testData.activePuzzle1Response, testData.activePuzzle2Response])
                 .end(function(err, res) {
                     if (err) return done(err);
                     return done();
@@ -51,26 +79,27 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
-                .expect(400, ErrorMessage400)
+                .expect(400, testData.ErrorMessage400)
                 .end(function(err, res) {
                     if (err) return done(err);
                     return done();
                 });
         });
 
+        // todo fix
         it('Post duplicate activePuzzle returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
-                .send([activePuzzle1])
+                .send([testData.activePuzzle1])
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
             request
                 .post('/api/v1/user/activeGames')
-                .send([activePuzzle1])
+                .send([testData.activePuzzle1])
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
-                .expect(400, ErrorMessage400)
+                .expect(400, testData.ErrorMessage400)
                 .end(function(err, res) {
                     if (err) return done(err);
                     return done();
@@ -82,10 +111,10 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
         it('Post no Auth header returns 401 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
-                .send([activePuzzle1])
+                .send([testData.activePuzzle1])
                 .set('Content-Type', 'application/json')
                 .expect('Content-Type', /json/)
-                .expect(401, ErrorMessage401)
+                .expect(401, testData.ErrorMessage401)
                 .end(function(err, res) {
                     if (err) return done(err);
                     return done();
@@ -95,11 +124,11 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
         it('Post invalid Auth header returns 401 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
-                .send([activePuzzle1])
+                .send([testData.activePuzzle1])
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer')
                 .expect('Content-Type', /json/)
-                .expect(401, ErrorMessage401)
+                .expect(401, testData.ErrorMessage401)
                 .end(function(err, res) {
                     if (err) return done(err);
                     return done();
@@ -110,11 +139,11 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
         it('Post expired Auth token returns 401 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
-                .send([activePuzzle1])
+                .send([testData.activePuzzle1])
                 .set('Content-Type', 'application/json')
-                .set('Authorization', 'Bearer ' + expiredAccessToken)
+                .set('Authorization', 'Bearer ' + testData.expiredAccessToken)
                 .expect('Content-Type', /json/)
-                .expect(401, ErrorMessage401)
+                .expect(401, testData.ErrorMessage401)
                 .end(function(err, res) {
                     if (err) return done(err);
                     return done();
