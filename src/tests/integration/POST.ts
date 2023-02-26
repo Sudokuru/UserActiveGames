@@ -15,7 +15,6 @@ before(function (done) {
         .set('Accept', 'application/json')
         .expect(function(res) {
             token = res.body.access_token;
-            console.log(token);
         })
         .end(function(err, res) {
             if (err) return done(err);
@@ -49,6 +48,25 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
             request
                 .post('/api/v1/user/activeGames')
                 .send()
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post duplicate activePuzzle returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([activePuzzle1])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+            request
+                .post('/api/v1/user/activeGames')
+                .send([activePuzzle1])
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)

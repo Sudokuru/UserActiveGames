@@ -20,6 +20,10 @@ export const ErrorMessage500 = {
     Status: 401
 };
 
+/*
+ * Valid active puzzles and corresponding responses
+ */
+
 export const activePuzzle1 = {
     "userID": "Thomas",
     "puzzle": "310084002200150006570003010423708095760030000009562030050006070007000900000001500",
@@ -45,6 +49,14 @@ export const activePuzzle1Response = {
     "numWrongCellsPlayed": 1,
     "_id": "ID",
     "__v": 0
+};
+
+export const activePuzzle2 = {
+
+};
+
+export const activePuzzle2Response = {
+
 };
 
 
