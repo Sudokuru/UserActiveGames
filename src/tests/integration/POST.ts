@@ -35,11 +35,13 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
                 .send([testData.activePuzzle1])
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
-                .expect(function(res) {
-                    res.body[0]._id = "ID";
-                    res.body[0].moves[0]._id = "ID";
-                })
                 .expect('Content-Type', /json/)
+                .expect(function(res) {
+                    if (res.body[0] != undefined){
+                        res.body[0]._id = "ID";
+                        res.body[0].moves[0]._id = "ID";
+                    }
+                })
                 .expect(201, [testData.activePuzzle1Response])
                 .end(function(err, res) {
                     if (err) return done(err);
@@ -55,12 +57,14 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect(function(res) {
-                    res.body[0]._id = "ID";
-                    res.body[0].moves[0]._id = "ID";
+                    if (res.body[0] != undefined){
+                        res.body[0]._id = "ID";
+                        res.body[0].moves[0]._id = "ID";
 
-                    res.body[1]._id = "ID";
-                    res.body[1].moves[0]._id = "ID";
-                    res.body[1].moves[1]._id = "ID";
+                        res.body[1]._id = "ID";
+                        res.body[1].moves[0]._id = "ID";
+                        res.body[1].moves[1]._id = "ID";
+                    }
                 })
                 .expect('Content-Type', /json/)
                 .expect(201, [testData.activePuzzle1Response, testData.activePuzzle2Response])
