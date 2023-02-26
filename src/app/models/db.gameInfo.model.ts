@@ -20,7 +20,7 @@ mongoose.set({ debug: true, autoCreate: true})
  * the game can be resumed and the stats can be transferred at the end of the game
  */
 const userActiveGamesSchema = new Schema<userActiveGames>({
-    userID: { type: String, required: true, unique: false },
+    userID: { type: String, required: true},
     puzzle: { type: String, required: true, unique: true },
     currentTime: { type: Number, required: true },
     moves: [{
@@ -57,6 +57,4 @@ const userActiveGamesSchema = new Schema<userActiveGames>({
 });
 
 
-let UserPausedGames = mongoose.model("UserPausedGames", userActiveGamesSchema, 'user_game_info');
-
-export = { UserPausedGames };
+export = mongoose.model("UserPausedGames", userActiveGamesSchema, 'user_game_info');

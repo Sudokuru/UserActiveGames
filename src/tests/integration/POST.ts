@@ -8,6 +8,9 @@ const preRequest = request('https://' + process.env.AUTH0_BASE_URL);
 request = request('http://localhost:3001');
 let token = null;
 
+/*
+ * This method retrieves access token for Dev environment and stores it in a local variable
+ */
 before(function (done) {
     preRequest
         .post('/oauth/token')
@@ -22,10 +25,22 @@ before(function (done) {
             if (err) return done(err);
             return done();
         });
-
-    // request
-    //     .delete('/api/v1/user/activeGames')
 });
+
+/*
+ * This method deletes all items in the database before each test
+ */
+beforeEach (function (done) {
+    request
+        .delete('/api/v1/user/activeGames')
+        .send()
+        .set('Accept', 'application/json')
+        .set('Authorization', 'Bearer ' + token)
+        .end(function(err, res) {
+            if (err) return done(err);
+            return done();
+        });
+})
 
 describe('Test POST requests for /api/v1/user/activeGames', function () {
     describe('Test code 200 POST requests', function () {
@@ -90,13 +105,14 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        // todo fix, disallow duplicate puzzles
         it('Post duplicate activePuzzle returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
                 .send([testData.activePuzzle1])
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
+                .end(function(err, res) {
+                });
             request
                 .post('/api/v1/user/activeGames')
                 .send([testData.activePuzzle1])
