@@ -22,14 +22,14 @@ mongoose.set({ debug: true, autoCreate: true})
 const userActiveGamesSchema = new Schema<userActiveGames>({
     userID: { type: String, required: true},
     puzzle: { type: String, required: true, unique: true },
-    currentTime: { type: Number, required: true },
+    currentTime: { type: Number, required: true, default: 0 },
     moves: [{
-        puzzleCurrentState: { type: String, required: true, unique: false },
-        puzzleCurrentNotesState: { type: String, required: true, unique: false }
+        puzzleCurrentState: { type: String, required: false, unique: false },
+        puzzleCurrentNotesState: { type: String, required: false, unique: false }
         // moveTime: { type: Number, required: true }
     }],
-    numHintsAskedFor: { type: Number, required: true },
-    numWrongCellsPlayed: { type: Number, required: true },
+    numHintsAskedFor: { type: Number, required: true, default: 0 },
+    numWrongCellsPlayed: { type: Number, required: true, default: 0 },
     numWrongCellsPlayedPerStrategy: {
         NAKED_SINGLE: { type: Number, required: false },
         HIDDEN_SINGLE: { type: Number, required: false },

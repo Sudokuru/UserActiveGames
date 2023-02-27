@@ -54,7 +54,6 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
                 .expect(function(res) {
                     if (res.body[0] != undefined){
                         res.body[0]._id = "ID";
-                        res.body[0].moves[0]._id = "ID";
                     }
                 })
                 .expect(201, [testData.activePuzzle1Response])
@@ -73,7 +72,6 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
                 .expect(function(res) {
                     if (res.body[0] != undefined){
                         res.body[0]._id = "ID";
-                        res.body[0].moves[0]._id = "ID";
 
                         res.body[1]._id = "ID";
                         res.body[1].moves[0]._id = "ID";
@@ -91,6 +89,20 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
 
     describe('Test code 400 POST requests', function () {
         it('Post empty body returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send()
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post empty user id returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
                 .send()
