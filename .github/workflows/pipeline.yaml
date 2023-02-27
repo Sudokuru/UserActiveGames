@@ -52,10 +52,17 @@ jobs:
         run: sleep 20s
         shell: bash
 
-      - name: Run API tests
+      - name: Install Dependencies
         run: |
           npm ci
+
+      - name: Run API tests
+        run: |
           npm run test:CIintegration > test-results.json
+
+      - name: Print API results
+        run: |
+          cat "test-results.json"
 
       - name: Test Reporter
         uses: dorny/test-reporter@v1
