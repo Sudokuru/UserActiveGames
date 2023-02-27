@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test:unit": "jest --testPathPattern=src/tests/unit",
-    "test:integration": "mocha --require ts-node/register src/tests/integration/**/*.ts",
+    "test:integration": "mocha --require ts-node/register src/tests/integration/**/*.test.ts",
     "update-docs": "typedoc --entryPoints src --entryPointStrategy expand --out docs --plugin typedoc-theme-hierarchy --theme hierarchy",
     "docker": "docker-compose up -d",
     "app": "docker-compose -f docker-compose-app.yml up -d",

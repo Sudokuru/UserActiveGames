@@ -2,7 +2,7 @@ let request = require('supertest');
 require('dotenv').config();
 import {
     testData
-} from "./testData";
+} from "./testData.test";
 
 const preRequest = request('https://' + process.env.AUTH0_BASE_URL);
 request = request('http://localhost:3001');
