@@ -54,7 +54,7 @@ jobs:
 
       - name: Run API tests
         run: |
-          npm run i
+          npm ci
           npm run test:integration --reporter json > test-results.json
 
       - name: Test Reporter
