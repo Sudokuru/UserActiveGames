@@ -155,7 +155,6 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        // todo wait 2 hours for token to expire
         it('Post expired Auth token returns 401 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
