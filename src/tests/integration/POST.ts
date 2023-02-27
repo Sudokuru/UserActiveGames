@@ -119,7 +119,21 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
         it('Post no user id field returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
-                .send([testData.uerIDNotPresent])
+                .send([testData.userIDNotPresent])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post user id is integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.userIDIsInt])
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -158,6 +172,104 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
                 });
         });
 
+        it('Post puzzle too long returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.puzzleIsTooLong])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post puzzle too short returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.puzzleIsTooShort])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post puzzle invalid character returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.puzzleHasInvalidCharacter])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post currentTime is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.currentTimeIsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post puzzleCurrentState is too long returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.puzzleCurrentStateIsTooLong])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post puzzleCurrentState is too short returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.puzzleCurrentStateIsTooShort])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post puzzleCurrentState has invalid character returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.puzzleCurrentStateHasInvalidCharacter])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
         it('Post duplicate activePuzzle returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
@@ -165,6 +277,7 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .end(function(err, res) {
+                    console.log(res.body);
                 });
             request
                 .post('/api/v1/user/activeGames')
@@ -174,6 +287,7 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
                 .expect('Content-Type', /json/)
                 .expect(400, testData.ErrorMessage400)
                 .end(function(err, res) {
+                    console.log(res.body);
                     if (err) return done(err);
                     return done();
                 });

@@ -130,12 +130,8 @@ class testData {
      * Invalid Active Puzzles
      */
 
-    static uerIDNotPresent = {
+    static userIDNotPresent = {
         "puzzle": "310084002200150006570003010423708095760030000009562030050006070007000900000001500",
-    };
-
-    static puzzleNotPresent = {
-        "userID": "Thomas",
     };
 
     static userIDBlank = {
@@ -143,9 +139,63 @@ class testData {
         "puzzle": "310084002200150006570003010423708095760030000009562030050006070007000900000001500",
     };
 
+    static userIDIsInt = {
+        "userID": 5,
+        "puzzle": "310084002200150006570003010423708095760030000009562030050006070007000900000001500",
+    };
+
+    static puzzleNotPresent = {
+        "userID": "Thomas",
+    };
+
     static puzzleBlank = {
         "userID": "Thomas",
         "puzzle": "",
+    };
+
+    static puzzleIsTooLong = {
+        "userID": "Thomas",
+        "puzzle": "3310084002200150006570003010423708095760030000009562030050006070007000900000001500",
+    };
+
+    static puzzleIsTooShort = {
+        "userID": "Thomas",
+        "puzzle": "10084002200150006570003010423708095760030000009562030050006070007000900000001500",
+    };
+
+    static puzzleHasInvalidCharacter = {
+        "userID": "Thomas",
+        "puzzle": "3100840022001500065700030/0423708095760030000009562030050006070007000900000001500",
+    };
+
+    static currentTimeIsNotInteger = {
+        "userID": "Thomas",
+        "puzzle": "310084002200150006570003010423708095760030000009562030050006070007000900000001500",
+        "currentTime": "Banana"
+    };
+
+    static puzzleCurrentStateIsTooLong = {
+        "userID": "Thomas",
+        "puzzle": "310084002200150006570003010423708095760030000009562030050006070007000900000001500",
+        "moves": [{
+            "puzzleCurrentState": "3310084002200150006570003010423708095760030000009562030050006070007000900000001500"
+        }]
+    };
+
+    static puzzleCurrentStateIsTooShort = {
+        "userID": "Thomas",
+        "puzzle": "310084002200150006570003010423708095760030000009562030050006070007000900000001500",
+        "moves": [{
+            "puzzleCurrentState": "10084002200150006570003010423708095760030000009562030050006070007000900000001500"
+        }]
+    };
+
+    static puzzleCurrentStateHasInvalidCharacter = {
+        "userID": "Thomas",
+        "puzzle": "310084002200150006570003010423708095760030000009562030050006070007000900000001500",
+        "moves": [{
+            "puzzleCurrentState": "3100840022001500065700030/0423708095760030000009562030050006070007000900000001500"
+        }]
     };
 }
 
