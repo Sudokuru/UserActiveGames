@@ -24,7 +24,7 @@ exports.validateUserActiveGamesBodyPOST = [
     body('*.moves.*.puzzleCurrentState', 'puzzle current state did not match whitelist').optional().whitelist("0123456789"),
     body('*.moves.*.puzzleCurrentState', 'puzzle current state is not of correct length').optional().isLength({ min: 81, max: 81 }),
     body('*.moves.*.puzzleCurrentNotesState', 'puzzle current notes state state did not match whitelist').optional().whitelist("01"),
-    body('*.moves.*.puzzleCurrentNotesState', 'puzzle current notes state state is not of correct length').optional().isLength({ min: 9, max: 729 }),
+    body('*.moves.*.puzzleCurrentNotesState', 'puzzle current notes state state is not of correct length').optional().isLength({ min: 729, max: 729 }),
     body('*.numHintsAskedFor', 'numHintsAskedFor is not an integer').optional().isInt(),
     body('*.numWrongCellsPlayed', 'numWrongCellsPlayed is not an integer').optional().isInt(),
 

@@ -88,6 +88,27 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
     });
 
     describe('Test code 400 POST requests', function () {
+        it('Post duplicate activePuzzle returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.activePuzzle1])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .end(function(err, res) {
+                });
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.activePuzzle1])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
         it('Post no body returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
@@ -270,17 +291,374 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post duplicate activePuzzle returns 400 error message', function (done) {
+        it('Post puzzleCurrentNotesState is too long returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
-                .send([testData.activePuzzle1])
+                .send([testData.puzzleCurrentNotesStateIsTooLong])
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
                 .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
                 });
+        });
+
+        it('Post puzzleCurrentNotesState is too short returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
-                .send([testData.activePuzzle1])
+                .send([testData.puzzleCurrentNotesStateIsTooShort])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post puzzleCurrentNotesState has invalid character returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.puzzleCurrentNotesStateHasInvalidCharacter])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post numHintsAskedFor is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.numHintsAskedForIsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post numWrongCellsPlayed is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.numWrongCellsPlayedIsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post NAKED_SINGLE is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.NAKED_SINGLE_IsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post HIDDEN_SINGLE is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.HIDDEN_SINGLE_IsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post NAKED_PAIR is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.NAKED_PAIR_IsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post NAKED_TRIPLET is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.NAKED_TRIPLET_IsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post NAKED_QUADRUPLET is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.NAKED_QUADRUPLET_IsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post NAKED_QUINTUPLET is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.NAKED_QUINTUPLET_IsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post NAKED_SEXTUPLET is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.NAKED_SEXTUPLET_IsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post NAKED_SEPTUPLET is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.NAKED_SEPTUPLET_IsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post NAKED_OCTUPLET is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.NAKED_OCTUPLET_IsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post HIDDEN_PAIR is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.HIDDEN_PAIR_IsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post HIDDEN_TRIPLET is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.HIDDEN_TRIPLET_IsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post HIDDEN_QUADRUPLET is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.HIDDEN_QUADRUPLET_IsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post HIDDEN_QUINTUPLET is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.HIDDEN_QUINTUPLET_IsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post HIDDEN_SEXTUPLET is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.HIDDEN_SEXTUPLET_IsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post HIDDEN_SEPTUPLET is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.HIDDEN_SEPTUPLET_IsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post HIDDEN_OCTUPLET is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.HIDDEN_OCTUPLET_IsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post POINTING_PAIR is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.POINTING_PAIR_IsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post POINTING_TRIPLET is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.POINTING_TRIPLET_IsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post BOX_LINE_REDUCTION is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.BOX_LINE_REDUCTION_IsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post X_WING is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.X_WING_IsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post SWORDFISH is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.SWORDFISH_IsNotInteger])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post SINGLES_CHAINING is not integer returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.SINGLES_CHAINING_IsNotInteger])
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
