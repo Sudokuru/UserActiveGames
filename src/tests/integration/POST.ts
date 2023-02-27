@@ -88,7 +88,7 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
     });
 
     describe('Test code 400 POST requests', function () {
-        it('Post empty body returns 400 error message', function (done) {
+        it('Post no body returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
                 .send()
@@ -102,10 +102,53 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post empty user id returns 400 error message', function (done) {
+        it('Post empty user id field returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
-                .send()
+                .send([testData.userIDBlank])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post no user id field returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.uerIDNotPresent])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    console.log(res.body);
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post empty puzzle field returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.puzzleBlank])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post no puzzle field returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames')
+                .send([testData.puzzleNotPresent])
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)

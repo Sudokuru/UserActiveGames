@@ -17,7 +17,7 @@ import {body, query} from "express-validator";
  */
 exports.validateUserActiveGamesBodyPOST = [
     body().isArray().withMessage('body is not an array'),
-    body('*.userID', 'userID did not match correct format'),
+    body('*.userID', 'userID did not match correct format').isString().isLength({ min: 1 }),
     body('*.puzzle', 'puzzle did not match whitelist').whitelist("0123456789"),
     body('*.puzzle', 'puzzle is not of correct length').isLength({ min: 81, max: 81 }),
     body('*.currentTime', 'currentTime is not an integer').optional().isInt(),
