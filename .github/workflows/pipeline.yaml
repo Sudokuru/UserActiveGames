@@ -58,7 +58,7 @@ jobs:
 
       - name: Run API tests
         run: |
-          npm run test:CIintegration > test-results.json
+          npm run test:CIintegration
 
       - name: Print API results
         if: success() || failure()
