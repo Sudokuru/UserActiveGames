@@ -64,7 +64,6 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        // todo fix add numWrongCellsPlayedPerStrategy
         it('Post ActivePuzzle1 and ActivePuzzle2 returns 200 and expected response', function (done) {
             request
                 .post('/api/v1/user/activeGames')
