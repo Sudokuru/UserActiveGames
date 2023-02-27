@@ -55,7 +55,7 @@ jobs:
       - name: Run API tests
         run: |
           npm ci
-          npm run test:integration --reporter json > test-results.json
+          npm run test:CIintegration > test-results.json
 
       - name: Test Reporter
         uses: dorny/test-reporter@v1
