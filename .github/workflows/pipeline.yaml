@@ -1,0 +1,90 @@
+name: "Pipeline"
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+concurrency: main_workflow
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Add .env file
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_AUTH0_AUDIENCE: ${{ secrets.AUTH0_AUDIENCE }}
+          envkey_AUTH0_BASE_URL: ${{ secrets.AUTH0_BASE_URL }}
+          envkey_MONGO_URL: mongodb://mongo:27017
+          directory: .
+          file_name: .env
+          fail_on_empty: true
+
+      - name: Run Docker image
+        run: |
+          npm run app
+      #
+      - name: Sleep for 20 seconds
+        run: sleep 20s
+        shell: bash
+
+      - name: Run API tests
+        run: |
+          npm run i
+          npm run test:integration --reporter json > test-results.json
+
+      - name: Test Reporter
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: Mocha Integration Tests
+          path: test-results.json
+          reporter: mocha-json
+
+      - name: Dump mongo logs
+        if: failure()
+        uses: jwalton/gh-docker-logs@v2
+
+  deploy_documentation:
+    name: Deploy Documentation
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: [ test ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - run: npm ci
+      - run: npm run update-docs
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: 'docs/'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
