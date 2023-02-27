@@ -277,7 +277,6 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .end(function(err, res) {
-                    console.log(res.body);
                 });
             request
                 .post('/api/v1/user/activeGames')
@@ -287,7 +286,6 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
                 .expect('Content-Type', /json/)
                 .expect(400, testData.ErrorMessage400)
                 .end(function(err, res) {
-                    console.log(res.body);
                     if (err) return done(err);
                     return done();
                 });
