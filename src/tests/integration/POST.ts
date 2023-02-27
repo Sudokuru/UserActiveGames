@@ -88,6 +88,48 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
     });
 
     describe('Test code 400 POST requests', function () {
+        it('Post invalid path 1 returns 400 error message', function (done) {
+            request
+                .post('/invalid')
+                .send([testData.activePuzzle1])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post invalid path 2 returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/activeGames/invalid')
+                .send([testData.activePuzzle1])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Post invalid path 3 returns 400 error message', function (done) {
+            request
+                .post('/api/v1/user/invalid')
+                .send([testData.activePuzzle1])
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, testData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
         it('Post duplicate activePuzzle returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
