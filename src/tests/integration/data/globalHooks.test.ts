@@ -19,8 +19,6 @@ before(function (done) {
             token = res.body.access_token;
         })
         .end(function(err, res) {
-            console.log("HELLO!");
-            console.log(token);
             if (err) return done(err);
             return done();
         });

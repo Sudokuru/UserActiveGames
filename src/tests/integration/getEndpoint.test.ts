@@ -669,6 +669,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
+        //todo convert
         it('Get too long puzzle query returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
@@ -683,6 +684,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
+        //todo convert
         it('Get too short puzzle query returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
@@ -697,6 +699,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
+        //todo convert
         it('Get invalid character puzzle query returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
@@ -711,6 +714,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
+        //todo convert
         it('Post no puzzle field returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
@@ -725,6 +729,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
+        //todo convert
         it('Post puzzle too long returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
@@ -739,6 +744,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
+        //todo convert
         it('Post puzzle too short returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
@@ -753,6 +759,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
+        //todo convert
         it('Post puzzle invalid character returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
@@ -767,10 +774,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post currentTime is not integer returns 400 error message', function (done) {
+        it('Get currentTime is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.currentTimeIsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ currentTime: "Banana"} )
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -781,6 +788,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
+        //todo convert
         it('Post puzzleCurrentState is too long returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
@@ -795,6 +803,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
+        //todo convert
         it('Post puzzleCurrentState is too short returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
@@ -809,6 +818,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
+        //todo convert
         it('Post puzzleCurrentState has invalid character returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
@@ -823,6 +833,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
+        //todo convert
         it('Post puzzleCurrentNotesState is too long returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
@@ -837,6 +848,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
+        //todo convert
         it('Post puzzleCurrentNotesState is too short returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
@@ -851,7 +863,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post puzzleCurrentNotesState has invalid character returns 400 error message', function (done) {
+        it('Get puzzleCurrentNotesState has invalid character returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
                 .send([postTestData.puzzleCurrentNotesStateHasInvalidCharacter])
@@ -865,10 +877,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post numHintsAskedFor is not integer returns 400 error message', function (done) {
+        it('Get numHintsAskedFor is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.numHintsAskedForIsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ numHintsAskedFor: "Banana"} )
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -879,10 +891,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post numWrongCellsPlayed is not integer returns 400 error message', function (done) {
+        it('Get numWrongCellsPlayed is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.numWrongCellsPlayedIsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ numWrongCellsPlayed: "Banana"} )
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -893,10 +905,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post NAKED_SINGLE is not integer returns 400 error message', function (done) {
+        it('Get NAKED_SINGLE is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.NAKED_SINGLE_IsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SINGLE': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -907,10 +919,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post HIDDEN_SINGLE is not integer returns 400 error message', function (done) {
+        it('Get HIDDEN_SINGLE is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.HIDDEN_SINGLE_IsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SINGLE': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -921,10 +933,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post NAKED_PAIR is not integer returns 400 error message', function (done) {
+        it('Get NAKED_PAIR is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.NAKED_PAIR_IsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_PAIR': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -935,10 +947,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post NAKED_TRIPLET is not integer returns 400 error message', function (done) {
+        it('Get NAKED_TRIPLET is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.NAKED_TRIPLET_IsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_TRIPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -949,10 +961,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post NAKED_QUADRUPLET is not integer returns 400 error message', function (done) {
+        it('Get NAKED_QUADRUPLET is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.NAKED_QUADRUPLET_IsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_QUADRUPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -963,10 +975,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post NAKED_QUINTUPLET is not integer returns 400 error message', function (done) {
+        it('Get NAKED_QUINTUPLET is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.NAKED_QUINTUPLET_IsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_QUINTUPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -977,10 +989,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post NAKED_SEXTUPLET is not integer returns 400 error message', function (done) {
+        it('Get NAKED_SEXTUPLET is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.NAKED_SEXTUPLET_IsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SEXTUPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -991,10 +1003,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post NAKED_SEPTUPLET is not integer returns 400 error message', function (done) {
+        it('Get NAKED_SEPTUPLET is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.NAKED_SEPTUPLET_IsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SEPTUPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1005,10 +1017,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post NAKED_OCTUPLET is not integer returns 400 error message', function (done) {
+        it('Get NAKED_OCTUPLET is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.NAKED_OCTUPLET_IsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_OCTUPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1019,10 +1031,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post HIDDEN_PAIR is not integer returns 400 error message', function (done) {
+        it('Get HIDDEN_PAIR is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.HIDDEN_PAIR_IsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_PAIR': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1033,10 +1045,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post HIDDEN_TRIPLET is not integer returns 400 error message', function (done) {
+        it('Get HIDDEN_TRIPLET is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.HIDDEN_TRIPLET_IsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_TRIPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1047,10 +1059,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post HIDDEN_QUADRUPLET is not integer returns 400 error message', function (done) {
+        it('Get HIDDEN_QUADRUPLET is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.HIDDEN_QUADRUPLET_IsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUADRUPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1061,10 +1073,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post HIDDEN_QUINTUPLET is not integer returns 400 error message', function (done) {
+        it('Get HIDDEN_QUINTUPLET is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.HIDDEN_QUINTUPLET_IsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUINTUPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1075,10 +1087,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post HIDDEN_SEXTUPLET is not integer returns 400 error message', function (done) {
+        it('Get HIDDEN_SEXTUPLET is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.HIDDEN_SEXTUPLET_IsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEXTUPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1089,10 +1101,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post HIDDEN_SEPTUPLET is not integer returns 400 error message', function (done) {
+        it('Get HIDDEN_SEPTUPLET is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.HIDDEN_SEPTUPLET_IsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEPTUPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1103,10 +1115,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post HIDDEN_OCTUPLET is not integer returns 400 error message', function (done) {
+        it('Get HIDDEN_OCTUPLET is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.HIDDEN_OCTUPLET_IsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_OCTUPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1117,10 +1129,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post POINTING_PAIR is not integer returns 400 error message', function (done) {
+        it('Get POINTING_PAIR is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.POINTING_PAIR_IsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.POINTING_PAIR': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1131,10 +1143,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post POINTING_TRIPLET is not integer returns 400 error message', function (done) {
+        it('Get POINTING_TRIPLET is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.POINTING_TRIPLET_IsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.POINTING_TRIPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1145,10 +1157,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post BOX_LINE_REDUCTION is not integer returns 400 error message', function (done) {
+        it('Get BOX_LINE_REDUCTION is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.BOX_LINE_REDUCTION_IsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.BOX_LINE_REDUCTION': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1159,10 +1171,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post X_WING is not integer returns 400 error message', function (done) {
+        it('Get X_WING is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.X_WING_IsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.X_WING': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1173,10 +1185,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post SWORDFISH is not integer returns 400 error message', function (done) {
+        it('Get SWORDFISH is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.SWORDFISH_IsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.SWORDFISH': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1187,10 +1199,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post SINGLES_CHAINING is not integer returns 400 error message', function (done) {
+        it('Get SINGLES_CHAINING is not integer returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.SINGLES_CHAINING_IsNotInteger])
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.SINGLES_CHAINING': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1202,11 +1214,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         });
     });
 
-    describe('Test code 401 POST requests', function () {
-        it('Post no Auth header returns 401 error message', function (done) {
+    describe('Test code 401 GET requests', function () {
+        it('Get no Auth header returns 401 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.activePuzzle1])
+                .get('/api/v1/user/activeGames')
                 .set('Content-Type', 'application/json')
                 .expect('Content-Type', /json/)
                 .expect(401, globalTestData.ErrorMessage401)
@@ -1216,10 +1227,9 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post invalid Auth header returns 401 error message', function (done) {
+        it('Get invalid Auth header returns 401 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.activePuzzle1])
+                .get('/api/v1/user/activeGames')
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer')
                 .expect('Content-Type', /json/)
@@ -1230,10 +1240,9 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post expired Auth token returns 401 error message', function (done) {
+        it('Get expired Auth token returns 401 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.activePuzzle1])
+                .get('/api/v1/user/activeGames')
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + globalTestData.expiredAccessToken)
                 .expect('Content-Type', /json/)
@@ -1243,5 +1252,9 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                     return done();
                 });
         });
+    });
+
+    describe('Test code 404 GET requests', function () {
+
     });
 });
