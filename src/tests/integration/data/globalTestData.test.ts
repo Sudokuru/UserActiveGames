@@ -18,7 +18,7 @@ class globalTestData {
     };
 
     static ErrorMessage404 = {
-        Error_Message: 'Not Found',
+        Error_Message: 'Resource Not Found',
         Status: 404
     };
 

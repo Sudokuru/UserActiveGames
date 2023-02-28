@@ -1323,6 +1323,340 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
     });
 
     describe('Test code 404 GET requests', function () {
+        it('Get numHintsAskedFor is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ numHintsAskedFor: 100} )
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
 
+        it('Get numWrongCellsPlayed is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ numWrongCellsPlayed: 100} )
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get NAKED_SINGLE is not integer present 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SINGLE': 100 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get HIDDEN_SINGLE is not integer present 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SINGLE': 100 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get NAKED_PAIR is not integer present 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_PAIR': 100 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get NAKED_TRIPLET is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_TRIPLET': 100 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get NAKED_QUADRUPLET is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_QUADRUPLET': 100 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get NAKED_QUINTUPLET is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_QUINTUPLET': 100 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get NAKED_SEXTUPLET is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SEXTUPLET': 100 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get NAKED_SEPTUPLET is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SEPTUPLET': 100 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get NAKED_OCTUPLET is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_OCTUPLET': 100 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get HIDDEN_PAIR is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_PAIR': 100 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get HIDDEN_TRIPLET is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_TRIPLET': 100 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get HIDDEN_QUADRUPLET is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUADRUPLET': 100 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get HIDDEN_QUINTUPLET is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUINTUPLET': 100 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get HIDDEN_SEXTUPLET is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEXTUPLET': 100 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get HIDDEN_SEPTUPLET is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEPTUPLET': 100 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get HIDDEN_OCTUPLET is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_OCTUPLET': 100 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get POINTING_PAIR is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.POINTING_PAIR': 100 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get POINTING_TRIPLET is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.POINTING_TRIPLET': 100 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get BOX_LINE_REDUCTION is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.BOX_LINE_REDUCTION': 100 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get X_WING is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.X_WING': 100 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get SWORDFISH is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.SWORDFISH': 100 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get SINGLES_CHAINING is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ 'numWrongCellsPlayedPerStrategy.SINGLES_CHAINING': 100 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
     });
 });
