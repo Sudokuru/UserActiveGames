@@ -49,22 +49,17 @@ jobs:
         run: |
           npm run app
 
+      - name: Print env file
+        run: cat ".env"
+
       - name: Sleep for 20 seconds
         run: sleep 20s
         shell: bash
 
-      - name: Install Dependencies
-        run: |
-          npm ci
-
       - name: Run API tests
         run: |
+          npm ci
           npm run test:CIintegration
-
-      - name: Print API results
-        if: success() || failure()
-        run: |
-          cat "test-results.json"
 
       - name: Test Reporter
         uses: dorny/test-reporter@v1
