@@ -17,6 +17,11 @@ class globalTestData {
         Status: 401
     };
 
+    static ErrorMessage404 = {
+        Error_Message: 'Not Found',
+        Status: 404
+    };
+
     static ErrorMessage500 = {
         Error_Message: 'Invalid Permission',
         Status: 401

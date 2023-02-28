@@ -71,15 +71,21 @@ function filterInputQuery(userActiveGames){
     }
     else{
         // we want to find all puzzles that contain the strategies in the strategyArray
-        if ('strategies' in userActiveGames){
-            filterValues.push({ 'strategies': { $in : userActiveGames['strategies'] } });
-            delete userActiveGames.strategies;
-        }
-        // we want to find all puzzles that contain the drillStrategies in the drillStrategyArray
-        if ('drillStrategies' in userActiveGames){
-            filterValues.push({ 'drillStrategies': { $in : userActiveGames['drillStrategies'] } });
-            delete userActiveGames.drillStrategies;
-        }
+        // if ('numWrongCellsPlayedPerStrategy' in userActiveGames){
+        //     console.log("HELLO!");
+        //     console.log("STrat: " + Object.keys(userActiveGames.numWrongCellsPlayedPerStrategy).length);
+        //     for (let i = 0; i < Object.keys(userActiveGames.numWrongCellsPlayedPerStrategy).length; i++){
+        //         let value = Object.values(userActiveGames.numWrongCellsPlayedPerStrategy[i]);
+        //         console.log("VALUE: " + value);
+        //     }
+        //     filterValues.push({ 'numWrongCellsPlayedPerStrategy': { $elemMatch : userActiveGames['strategies'] } });
+        //     delete userActiveGames.strategies;
+        // }
+        // // we want to find all puzzles that contain the drillStrategies in the drillStrategyArray
+        // if ('drillStrategies' in userActiveGames){
+        //     filterValues.push({ 'drillStrategies': { $in : userActiveGames['drillStrategies'] } });
+        //     delete userActiveGames.drillStrategies;
+        // }
         // since we have removed drillStrategies and strategies, if the object is not empty we push remaining
         // parameters to the query
         if (Object.keys(userActiveGames).length !== 0){
@@ -87,7 +93,6 @@ function filterInputQuery(userActiveGames){
         }
     }
 
-    filterValues.push(userActiveGames);
     return filterValues;
 }
 
