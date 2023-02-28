@@ -9,7 +9,6 @@
  */
 
 import {matchedData} from "express-validator";
-let dot = require('dot-object');
 const userActiveGamesService = require('../services/userActiveGames.service');
 
 /**
@@ -43,14 +42,9 @@ async function createUserActiveGame(req, res, next) {
 async function searchUserActiveGame(req, res, next) {
 
     const allData = matchedData(req, { locations: ['query'] });
-    console.log(req.query);
-    console.log(allData);
-    console.log(dot.dot(allData));
-
-    let curseYouExpressValidator = dot.dot(allData);
 
     try {
-        res.json(await userActiveGamesService.userActiveGamesPuzzle(curseYouExpressValidator));
+        res.json(await userActiveGamesService.userActiveGamesPuzzle(allData));
     } catch(err) {
         next(err);
     }

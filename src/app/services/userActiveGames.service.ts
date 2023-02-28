@@ -9,6 +9,7 @@
  */
 
 import {CustomError, CustomErrorEnum} from "../models/error.model";
+let dot = require('dot-object');
 
 const dataBase = require ('./db.service');
 const UserPausedGames = require("../models/db.gameInfo.model");
@@ -70,26 +71,19 @@ function filterInputQuery(userActiveGames){
         filterValues.push({});
     }
     else{
-        // we want to find all puzzles that contain the strategies in the strategyArray
-        // if ('numWrongCellsPlayedPerStrategy' in userActiveGames){
-        //     console.log("HELLO!");
-        //     console.log("STrat: " + Object.keys(userActiveGames.numWrongCellsPlayedPerStrategy).length);
-        //     for (let i = 0; i < Object.keys(userActiveGames.numWrongCellsPlayedPerStrategy).length; i++){
-        //         let value = Object.values(userActiveGames.numWrongCellsPlayedPerStrategy[i]);
-        //         console.log("VALUE: " + value);
-        //     }
-        //     filterValues.push({ 'numWrongCellsPlayedPerStrategy': { $elemMatch : userActiveGames['strategies'] } });
-        //     delete userActiveGames.strategies;
-        // }
-        // // we want to find all puzzles that contain the drillStrategies in the drillStrategyArray
-        // if ('drillStrategies' in userActiveGames){
-        //     filterValues.push({ 'drillStrategies': { $in : userActiveGames['drillStrategies'] } });
-        //     delete userActiveGames.drillStrategies;
-        // }
-        // since we have removed drillStrategies and strategies, if the object is not empty we push remaining
-        // parameters to the query
+        // This is for finding a document that contains a move array value with the two provided puzzleCurrentState and puzzleCurrentNotesState values
+        if (userActiveGames.moves !== undefined && 'puzzleCurrentState' in userActiveGames.moves && 'puzzleCurrentNotesState' in userActiveGames.moves){
+            filterValues.push({ moves: { $elemMatch: { puzzleCurrentState: userActiveGames.moves.puzzleCurrentState, puzzleCurrentNotesState: userActiveGames.moves.puzzleCurrentNotesState } } });
+            delete userActiveGames.moves;
+        }
+
+        // The dot notation is important to be able to retrieve all activeUserGames with a given numWrongCellsPlayedPerStrategy value
+        // Because we don't want to search for an exact mach of that object. We want to do an OR type operation for numWrongCellsPlayedPerStrategy
+        // not an AND type operation
+        // The reason we cannot use dot notation in the request is because express-validator converts it away from dot notation into JSON
+        // I cannot figure out a way to disable that functionality provided by express-validator
         if (Object.keys(userActiveGames).length !== 0){
-            filterValues.push(userActiveGames);
+            filterValues.push(dot.dot(userActiveGames));
         }
     }
 
