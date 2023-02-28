@@ -13,6 +13,7 @@ concurrency: main_workflow
 permissions:
   contents: write
   pages: write
+  checks: write
   id-token: write
 
 jobs:
