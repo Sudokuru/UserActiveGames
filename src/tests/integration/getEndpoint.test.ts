@@ -611,6 +611,50 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                     return done();
                 });
         });
+
+        it('GET by numWrongCellsPlayedPerStrategy query 200 and expected response', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query(
+                    { 'numWrongCellsPlayedPerStrategy.NAKED_SINGLE': 11 },
+                    { 'numWrongCellsPlayedPerStrategy.HIDDEN_SINGLE': 11 },
+                    { 'numWrongCellsPlayedPerStrategy.NAKED_PAIR': 11 },
+                    { 'numWrongCellsPlayedPerStrategy.NAKED_TRIPLET': 11 },
+                    { 'numWrongCellsPlayedPerStrategy.NAKED_QUADRUPLET': 11 },
+                    { 'numWrongCellsPlayedPerStrategy.NAKED_QUINTUPLET': 11 },
+                    { 'numWrongCellsPlayedPerStrategy.NAKED_SEXTUPLET': 11 },
+                    { 'numWrongCellsPlayedPerStrategy.NAKED_SEPTUPLET': 11 },
+                    { 'numWrongCellsPlayedPerStrategy.NAKED_OCTUPLET': 11 },
+                    { 'numWrongCellsPlayedPerStrategy.HIDDEN_PAIR': 11 },
+                    { 'numWrongCellsPlayedPerStrategy.HIDDEN_TRIPLET': 11 },
+                    { 'numWrongCellsPlayedPerStrategy.HIDDEN_QUADRUPLET': 11 },
+                    { 'numWrongCellsPlayedPerStrategy.HIDDEN_QUINTUPLET': 11 },
+                    { 'numWrongCellsPlayedPerStrategy.HIDDEN_SEXTUPLET': 11 },
+                    { 'numWrongCellsPlayedPerStrategy.HIDDEN_SEPTUPLET': 11 },
+                    { 'numWrongCellsPlayedPerStrategy.HIDDEN_OCTUPLET': 11 },
+                    { 'numWrongCellsPlayedPerStrategy.POINTING_PAIR': 11 },
+                    { 'numWrongCellsPlayedPerStrategy.POINTING_TRIPLET': 11 },
+                    { 'numWrongCellsPlayedPerStrategy.BOX_LINE_REDUCTION': 11 },
+                    { 'numWrongCellsPlayedPerStrategy.X_WING': 11 },
+                    { 'numWrongCellsPlayedPerStrategy.SWORDFISH': 11 },
+                    { 'numWrongCellsPlayedPerStrategy.SINGLES_CHAINING': 11 }
+                )
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(function(res) {
+                    if (res.body[0] != undefined){
+                        res.body[0]._id = "ID";
+                        res.body[0].moves[0]._id = "ID";
+                        res.body[0].moves[1]._id = "ID";
+                    }
+                })
+                .expect(200, [postTestData.activePuzzle2Response])
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
     });
 
     describe('Test code 400 GET requests', function () {
