@@ -7,8 +7,8 @@ import { globalTestData} from "./data/globalTestData.test";
 request = request('http://localhost:3001');
 
 describe('Test POST requests for /api/v1/user/activeGames', function () {
-    describe('Test code 200 POST requests', function () {
-        it('Post ActivePuzzle1 returns 200 and expected response', function (done) {
+    describe('Test code 201 POST requests', function () {
+        it('Post ActivePuzzle1 returns 201 and expected response', function (done) {
             request
                 .post('/api/v1/user/activeGames')
                 .send([postTestData.activePuzzle1])
@@ -27,7 +27,7 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post ActivePuzzle1 and ActivePuzzle2 returns 200 and expected response', function (done) {
+        it('Post ActivePuzzle1 and ActivePuzzle2 returns 201 and expected response', function (done) {
             request
                 .post('/api/v1/user/activeGames')
                 .send([postTestData.activePuzzle1, postTestData.activePuzzle2])
