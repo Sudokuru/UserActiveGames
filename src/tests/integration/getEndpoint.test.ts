@@ -150,6 +150,30 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
+        it('GET by moves AND query 200 and expected response', function (done) {
+            let currentNotesState = "100000010010101011111111111111111111111100000000000000000000000000000000001111111111111111000000000000000000001111111111111110000000000000000000111111111111110000000000000000000000000000001111111111111111100000000000000010000001001010101111111111111111111111110000000000000000000000000000000000111111111111111100000000000000000000111111111111111000000000000000000011111111111111000000000000000000000000000000111111111111111110000000000000001000000100101010111111111111111111111111000000000000000000000000000000000011111111111111110000000000000000000011111111111111100000000000000000001111111111111100000000000000000000000000000011111111111111111000000000000000100000010010101011111111111111111111111100000000000000000000000000001";
+            let currentState = "030000506000098071000000490009800000002010000380400609800030960100000004560982130";
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ moves: { puzzleCurrentState: currentState, puzzleCurrentNotesState: currentNotesState} })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(function(res) {
+                    console.log(res.body);
+                    if (res.body[0] != undefined){
+                        res.body[0]._id = "ID";
+                        res.body[0].moves[0]._id = "ID";
+                        res.body[0].moves[1]._id = "ID";
+                    }
+                })
+                .expect(200, [postTestData.activePuzzle2Response])
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
         it('GET by NAKED_SINGLE query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
