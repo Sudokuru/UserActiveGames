@@ -7,6 +7,7 @@ class postTestData {
 
     static puzzle1 = "310084002200150006570003010423708095760030000009562030050006070007000900000001500";
     static puzzle2 = "030000506000098071000000490009800000002010000380400609800030960100000004560982030";
+    static puzzle2MovesSwapped = "030000506000098071000000490009855500002010000380400609800030960100000004560982030";
     static puzzle3 = "130000506000098071000000490009800000002010000380400609800030960100000004560982030";
 
     static puzzle2Move1 = "036000506000098071000000490009800000002010000380400609800030960100000004560982130";
@@ -128,6 +129,88 @@ class postTestData {
             "X_WING": 11,
             "SWORDFISH": 11,
             "SINGLES_CHAINING": 11
+        },
+        "_id": "ID",
+        "__v": 0
+    };
+
+    static activePuzzle2MovesSwapped = {
+        "userID": postTestData.userName1,
+        "puzzle": postTestData.puzzle2MovesSwapped,
+        "currentTime": 255,
+        "moves": [{
+            "puzzleCurrentState": postTestData.puzzle2Move2,
+            "puzzleCurrentNotesState": postTestData.puzzle2Notes1,
+        },{
+            "puzzleCurrentState": postTestData.puzzle2Move1,
+            "puzzleCurrentNotesState": postTestData.puzzle2Notes2,
+        }],
+        "numHintsAskedFor": 2,
+        "numWrongCellsPlayed": 2,
+        "numWrongCellsPlayedPerStrategy": {
+            "NAKED_SINGLE": 9,
+            "HIDDEN_SINGLE": 9,
+            "NAKED_PAIR": 9,
+            "NAKED_TRIPLET": 9,
+            "NAKED_QUADRUPLET": 9,
+            "NAKED_QUINTUPLET": 9,
+            "NAKED_SEXTUPLET": 9,
+            "NAKED_SEPTUPLET": 9,
+            "NAKED_OCTUPLET": 9,
+            "HIDDEN_PAIR": 9,
+            "HIDDEN_TRIPLET": 9,
+            "HIDDEN_QUADRUPLET": 9,
+            "HIDDEN_QUINTUPLET": 9,
+            "HIDDEN_SEXTUPLET": 9,
+            "HIDDEN_SEPTUPLET": 9,
+            "HIDDEN_OCTUPLET": 9,
+            "POINTING_PAIR": 9,
+            "POINTING_TRIPLET": 9,
+            "BOX_LINE_REDUCTION": 9,
+            "X_WING": 9,
+            "SWORDFISH": 9,
+            "SINGLES_CHAINING": 9
+        },
+    };
+
+    static activePuzzle2MovesSwappedResponse = {
+        "userID": postTestData.userName1,
+        "puzzle": postTestData.puzzle2MovesSwapped,
+        "currentTime": 255,
+        "moves": [{
+            "puzzleCurrentState": postTestData.puzzle2Move2,
+            "puzzleCurrentNotesState": postTestData.puzzle2Notes1,
+            "_id": "ID"
+        },{
+            "puzzleCurrentState": postTestData.puzzle2Move1,
+            "puzzleCurrentNotesState": postTestData.puzzle2Notes2,
+            "_id": "ID"
+        }],
+        "numHintsAskedFor": 2,
+        "numWrongCellsPlayed": 2,
+        "numWrongCellsPlayedPerStrategy": {
+            "NAKED_SINGLE": 9,
+            "HIDDEN_SINGLE": 9,
+            "NAKED_PAIR": 9,
+            "NAKED_TRIPLET": 9,
+            "NAKED_QUADRUPLET": 9,
+            "NAKED_QUINTUPLET": 9,
+            "NAKED_SEXTUPLET": 9,
+            "NAKED_SEPTUPLET": 9,
+            "NAKED_OCTUPLET": 9,
+            "HIDDEN_PAIR": 9,
+            "HIDDEN_TRIPLET": 9,
+            "HIDDEN_QUADRUPLET": 9,
+            "HIDDEN_QUINTUPLET": 9,
+            "HIDDEN_SEXTUPLET": 9,
+            "HIDDEN_SEPTUPLET": 9,
+            "HIDDEN_OCTUPLET": 9,
+            "POINTING_PAIR": 9,
+            "POINTING_TRIPLET": 9,
+            "BOX_LINE_REDUCTION": 9,
+            "X_WING": 9,
+            "SWORDFISH": 9,
+            "SINGLES_CHAINING": 9
         },
         "_id": "ID",
         "__v": 0

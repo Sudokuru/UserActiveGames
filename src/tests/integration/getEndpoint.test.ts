@@ -13,7 +13,8 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
     beforeEach (function (done) {
         request
             .post('/api/v1/user/activeGames')
-            .send([postTestData.activePuzzle1, postTestData.activePuzzle2, postTestData.activePuzzle3])
+            .send([postTestData.activePuzzle1, postTestData.activePuzzle2,
+                postTestData.activePuzzle3, postTestData.activePuzzle2MovesSwapped])
             .set('Accept', 'application/json')
             .set('Authorization', 'Bearer ' + token)
             .end(function(err, res) {
@@ -41,9 +42,14 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                         res.body[2]._id = "ID";
                         res.body[2].moves[0]._id = "ID";
                         res.body[2].moves[1]._id = "ID";
+
+                        res.body[3]._id = "ID";
+                        res.body[3].moves[0]._id = "ID";
+                        res.body[3].moves[1]._id = "ID";
                     }
                 })
-                .expect(200, [postTestData.activePuzzle1Response, postTestData.activePuzzle2Response, postTestData.activePuzzle3Response])
+                .expect(200, [postTestData.activePuzzle1Response, postTestData.activePuzzle2Response,
+                    postTestData.activePuzzle3Response, postTestData.activePuzzle2MovesSwappedResponse])
                 .end(function(err, res) {
                     if (err) return done(err);
                     return done();
@@ -84,9 +90,13 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                         res.body[1]._id = "ID";
                         res.body[1].moves[0]._id = "ID";
                         res.body[1].moves[1]._id = "ID";
+
+                        res.body[2]._id = "ID";
+                        res.body[2].moves[0]._id = "ID";
+                        res.body[2].moves[1]._id = "ID";
                     }
                 })
-                .expect(200, [postTestData.activePuzzle1Response, postTestData.activePuzzle2Response])
+                .expect(200, [postTestData.activePuzzle1Response, postTestData.activePuzzle2Response, postTestData.activePuzzle2MovesSwappedResponse])
                 .end(function(err, res) {
                     if (err) return done(err);
                     return done();
@@ -185,9 +195,13 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                         res.body[0]._id = "ID";
                         res.body[0].moves[0]._id = "ID";
                         res.body[0].moves[1]._id = "ID";
+
+                        res.body[1]._id = "ID";
+                        res.body[1].moves[0]._id = "ID";
+                        res.body[1].moves[1]._id = "ID";
                     }
                 })
-                .expect(200, [postTestData.activePuzzle2Response])
+                .expect(200, [postTestData.activePuzzle2Response, postTestData.activePuzzle2MovesSwappedResponse])
                 .end(function(err, res) {
                     if (err) return done(err);
                     return done();
