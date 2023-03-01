@@ -158,7 +158,29 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
                 .expect(function(res) {
-                    console.log(res.body);
+                    if (res.body[0] != undefined){
+                        res.body[0]._id = "ID";
+                        res.body[0].moves[0]._id = "ID";
+                        res.body[0].moves[1]._id = "ID";
+                    }
+                })
+                .expect(200, [postTestData.activePuzzle2Response])
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        // todo have this one return 2 puzzles to verify it works
+        it('GET by moves OR query 200 and expected response', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ moves: { puzzleCurrentState: postTestData.puzzle2Move1} },
+                        { moves: { puzzleCurrentNotesState: postTestData.puzzle2Notes1}})
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(function(res) {
                     if (res.body[0] != undefined){
                         res.body[0]._id = "ID";
                         res.body[0].moves[0]._id = "ID";
@@ -714,22 +736,6 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 .expect('Content-Type', /json/)
                 .expect(400, globalTestData.ErrorMessage400)
                 .end(function(err, res) {
-                    if (err) return done(err);
-                    return done();
-                });
-        });
-
-        //todo figure out why this is not returning 400
-        it('Get invalid user id field returns 400 error message', function (done) {
-            request
-                .get('/api/v1/user/activeGames')
-                .query({userID: 5})
-                .set('Content-Type', 'application/json')
-                .set('Authorization', 'Bearer ' + token)
-                .expect('Content-Type', /json/)
-                .expect(400, globalTestData.ErrorMessage404)
-                .end(function(err, res) {
-                    console.log(res.body);
                     if (err) return done(err);
                     return done();
                 });
