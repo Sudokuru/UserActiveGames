@@ -786,7 +786,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get puzzle too long returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ puzzle: postTestData.puzzleIsTooLong })
+                .query({ puzzle: postTestData.postPuzzleIsTooLong })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -800,7 +800,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get puzzle too short returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ puzzle: postTestData.puzzleIsTooShort})
+                .query({ puzzle: postTestData.postPuzzleIsTooShort})
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -814,7 +814,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get puzzle invalid character returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ puzzle: postTestData.puzzleHasInvalidCharacter })
+                .query({ puzzle: postTestData.postPuzzleHasInvalidCharacter })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -842,7 +842,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get puzzleCurrentState is too long returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ moves: {puzzleCurrentState: postTestData.puzzleCurrentStateIsTooLong} })
+                .query({ moves: {puzzleCurrentState: postTestData.postPuzzleCurrentStateIsTooLong} })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -856,7 +856,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get puzzleCurrentState is too short returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ moves: {puzzleCurrentState: postTestData.puzzleCurrentStateIsTooShort} })
+                .query({ moves: {puzzleCurrentState: postTestData.postPuzzleCurrentStateIsTooShort} })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -870,7 +870,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get puzzleCurrentState has invalid character returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ moves: {puzzleCurrentState: postTestData.puzzleCurrentStateHasInvalidCharacter} })
+                .query({ moves: {puzzleCurrentState: postTestData.postPuzzleCurrentStateHasInvalidCharacter} })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -884,7 +884,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get puzzleCurrentNotesState is too long returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ moves: {puzzleCurrentNotesState: postTestData.puzzleCurrentNotesStateIsTooLong} })
+                .query({ moves: {puzzleCurrentNotesState: postTestData.postPuzzleCurrentNotesStateIsTooLong} })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -899,7 +899,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get puzzleCurrentNotesState is too short returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ moves: {puzzleCurrentNotesState: postTestData.puzzleCurrentNotesStateIsTooShort} })
+                .query({ moves: {puzzleCurrentNotesState: postTestData.postPuzzleCurrentNotesStateIsTooShort} })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -913,7 +913,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get puzzleCurrentNotesState has invalid character returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ moves: {puzzleCurrentNotesState: postTestData.puzzleCurrentNotesStateHasInvalidCharacter} })
+                .query({ moves: {puzzleCurrentNotesState: postTestData.postPuzzleCurrentNotesStateHasInvalidCharacter} })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
