@@ -1302,6 +1302,81 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
     });
 
     describe('Test code 404 GET requests', function () {
+        it('Get userID is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ userID: "Jimmy" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        // todo make valid not found puzzle
+        it('Get puzzle is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ userID: "Jimmy" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get currentTime is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ currentTime: 1000 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        // todo get valid puzzleCurrentState not found
+        it('Get puzzleCurrentState is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ currentTime: 1000 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        // todo get valid puzzleCurrentNotesState not found
+        it('Get puzzleCurrentNotesState is not present returns 404 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ currentTime: 1000 })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(404, globalTestData.ErrorMessage404)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+
+
         it('Get numHintsAskedFor is not present returns 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
