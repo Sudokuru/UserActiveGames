@@ -741,6 +741,20 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
+        it('Get invalid userID query returns 400 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ userID: ""})
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
         it('Get invalid character puzzle query returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
