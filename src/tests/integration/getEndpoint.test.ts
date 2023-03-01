@@ -741,37 +741,6 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        //todo convert
-        it('Get too long puzzle query returns 400 error message', function (done) {
-            request
-                .get('/api/v1/user/activeGames')
-                .query({ puzzle: "Banana"})
-                .set('Content-Type', 'application/json')
-                .set('Authorization', 'Bearer ' + token)
-                .expect('Content-Type', /json/)
-                .expect(400, globalTestData.ErrorMessage400)
-                .end(function(err, res) {
-                    if (err) return done(err);
-                    return done();
-                });
-        });
-
-        //todo convert
-        it('Get too short puzzle query returns 400 error message', function (done) {
-            request
-                .get('/api/v1/user/activeGames')
-                .query({ puzzle: "Banana"})
-                .set('Content-Type', 'application/json')
-                .set('Authorization', 'Bearer ' + token)
-                .expect('Content-Type', /json/)
-                .expect(400, globalTestData.ErrorMessage400)
-                .end(function(err, res) {
-                    if (err) return done(err);
-                    return done();
-                });
-        });
-
-        //todo convert
         it('Get invalid character puzzle query returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
@@ -786,11 +755,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        //todo convert
-        it('Post no puzzle field returns 400 error message', function (done) {
+        it('Get empty puzzle field returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.puzzleNotPresent])
+                .get('/api/v1/user/activeGames')
+                .query({ puzzle: "" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -801,11 +769,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        //todo convert
-        it('Post puzzle too long returns 400 error message', function (done) {
+        it('Get puzzle too long returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.puzzleIsTooLong])
+                .get('/api/v1/user/activeGames')
+                .query({ puzzle: postTestData.puzzleIsTooLong })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -816,11 +783,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        //todo convert
-        it('Post puzzle too short returns 400 error message', function (done) {
+        it('Get puzzle too short returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.puzzleIsTooShort])
+                .get('/api/v1/user/activeGames')
+                .query({ puzzle: postTestData.puzzleIsTooShort})
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -831,11 +797,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        //todo convert
-        it('Post puzzle invalid character returns 400 error message', function (done) {
+        it('Get puzzle invalid character returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.puzzleHasInvalidCharacter])
+                .get('/api/v1/user/activeGames')
+                .query({ puzzle: postTestData.puzzleHasInvalidCharacter })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -860,11 +825,52 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        //todo convert
-        it('Post puzzleCurrentState is too long returns 400 error message', function (done) {
+        it('Get puzzleCurrentState is too long returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.puzzleCurrentStateIsTooLong])
+                .get('/api/v1/user/activeGames')
+                .query({ moves: {puzzleCurrentState: postTestData.puzzleCurrentStateIsTooLong} })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get puzzleCurrentState is too short returns 400 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ moves: {puzzleCurrentState: postTestData.puzzleCurrentStateIsTooShort} })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get puzzleCurrentState has invalid character returns 400 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ moves: {puzzleCurrentState: postTestData.puzzleCurrentStateHasInvalidCharacter} })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Get puzzleCurrentNotesState is too long returns 400 error message', function (done) {
+            request
+                .get('/api/v1/user/activeGames')
+                .query({ moves: {puzzleCurrentNotesState: postTestData.puzzleCurrentNotesStateIsTooLong} })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -876,55 +882,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         });
 
         //todo convert
-        it('Post puzzleCurrentState is too short returns 400 error message', function (done) {
+        it('Get puzzleCurrentNotesState is too short returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.puzzleCurrentStateIsTooShort])
-                .set('Content-Type', 'application/json')
-                .set('Authorization', 'Bearer ' + token)
-                .expect('Content-Type', /json/)
-                .expect(400, globalTestData.ErrorMessage400)
-                .end(function(err, res) {
-                    if (err) return done(err);
-                    return done();
-                });
-        });
-
-        //todo convert
-        it('Post puzzleCurrentState has invalid character returns 400 error message', function (done) {
-            request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.puzzleCurrentStateHasInvalidCharacter])
-                .set('Content-Type', 'application/json')
-                .set('Authorization', 'Bearer ' + token)
-                .expect('Content-Type', /json/)
-                .expect(400, globalTestData.ErrorMessage400)
-                .end(function(err, res) {
-                    if (err) return done(err);
-                    return done();
-                });
-        });
-
-        //todo convert
-        it('Post puzzleCurrentNotesState is too long returns 400 error message', function (done) {
-            request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.puzzleCurrentNotesStateIsTooLong])
-                .set('Content-Type', 'application/json')
-                .set('Authorization', 'Bearer ' + token)
-                .expect('Content-Type', /json/)
-                .expect(400, globalTestData.ErrorMessage400)
-                .end(function(err, res) {
-                    if (err) return done(err);
-                    return done();
-                });
-        });
-
-        //todo convert
-        it('Post puzzleCurrentNotesState is too short returns 400 error message', function (done) {
-            request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.puzzleCurrentNotesStateIsTooShort])
+                .get('/api/v1/user/activeGames')
+                .query({ moves: {puzzleCurrentNotesState: postTestData.puzzleCurrentNotesStateIsTooShort} })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -937,8 +898,8 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
 
         it('Get puzzleCurrentNotesState has invalid character returns 400 error message', function (done) {
             request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.puzzleCurrentNotesStateHasInvalidCharacter])
+                .get('/api/v1/user/activeGames')
+                .query({ moves: {puzzleCurrentNotesState: postTestData.puzzleCurrentNotesStateHasInvalidCharacter} })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
