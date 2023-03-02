@@ -31,7 +31,6 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
                 .expect(function(res) {
-                    console.log(res.body);
                     if (res.body[0] != undefined){
                         res.body[0]._id = "ID";
 
@@ -83,7 +82,6 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
                 .expect(function(res) {
-                    console.log(res.body);
                     if (res.body[0] != undefined){
                         res.body[0]._id = "ID";
 
