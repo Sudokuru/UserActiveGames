@@ -1,12 +1,15 @@
+import {patchTestData} from "./data/patchTestData.test";
+
 let request = require('supertest');
 require('dotenv').config();
 import { token } from "./data/globalHooks.test";
 import { postTestData } from "./data/postTestData.test";
 import { globalTestData} from "./data/globalTestData.test";
+import Assert from "assert";
 
 request = request('http://localhost:3001');
 
-describe('Test Delete requests for /api/v1/user/activeGames', function () {
+describe('Test Patch requests for /api/v1/user/activeGames', function () {
     /*
      * This method populates the database before each test
      */
@@ -25,480 +28,1161 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
 
     describe('Test code 200 PATCH requests', function () {
         describe('Test code 200 present PATCH requests', function () {
-            it('Patch empty query 200 and expected response', function (done) {
+            it('Patch empty query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .send({"currentTime": 2000})
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 4 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({"currentTime": 2000})
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+
+                            res.body[1]._id = "ID";
+                            res.body[1].moves[0]._id = "ID";
+                            res.body[1].moves[1]._id = "ID";
+
+                            res.body[2]._id = "ID";
+                            res.body[2].moves[0]._id = "ID";
+                            res.body[2].moves[1]._id = "ID";
+
+                            res.body[3]._id = "ID";
+                            res.body[3].moves[0]._id = "ID";
+                            res.body[3].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle1CurrentTimeResponse(), patchTestData.patchActivePuzzle2CurrentTimeResponse(),
+                        patchTestData.patchActivePuzzle3CurrentTimeResponse(), patchTestData.patchActivePuzzle2MovesSwappedCurrentTimeResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified4Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by puzzle query 200 and expected response', function (done) {
+            it('Patch puzzle query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ puzzle: postTestData.puzzle1})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .send({"currentTime": 2000})
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({"currentTime": 2000})
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle1CurrentTimeResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by userID query returns 200 and expected response', function (done) {
+            it('Patch userID query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ userID: "Thomas"})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .send({"currentTime": 2000})
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 3 })
                     .end(function(err, res) {
-                        if (err) return done(err);
-                        return done();
                     });
-            });
 
-            it('Patch by currentTime query 200 and expected response', function (done) {
                 request
-                    .patch('/api/v1/user/activeGames')
-                    .query({ currentTime: 0 })
+                    .get('/api/v1/user/activeGames')
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({"currentTime": 2000})
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+
+                            res.body[1]._id = "ID";
+                            res.body[1].moves[0]._id = "ID";
+                            res.body[1].moves[1]._id = "ID";
+
+                            res.body[2]._id = "ID";
+                            res.body[2].moves[0]._id = "ID";
+                            res.body[2].moves[1]._id = "ID";
+                        }
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .expect(200, [patchTestData.patchActivePuzzle1CurrentTimeResponse(), patchTestData.patchActivePuzzle2CurrentTimeResponse(),
+                        patchTestData.patchActivePuzzle2MovesSwappedCurrentTimeResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified3Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by numHintsAskedFor query 200 and expected response', function (done) {
+            it('Patch currentTime query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({"currentTime": 0})
+                    .send({"currentTime": 2000})
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        patchBody = res.body;
+                    })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({"currentTime": 2000})
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle1CurrentTimeResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
+                    .end(function(err, res) {
+                        if (err) return done(err);
+                        return done();
+                    });
+            });
+
+            it('Patch numHintsAskedFor query 200 with currentTime and expected response', function (done) {
+                let patchBody;
+                request
+                    .patch('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
                     .query({ numHintsAskedFor: 0 })
-                    .set('Content-Type', 'application/json')
-                    .set('Authorization', 'Bearer ' + token)
+                    .send({ numHintsAskedFor: 100 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ numHintsAskedFor: 100 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle1NumHintsAskedForResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by numWrongCellsPlayed query 200 and expected response', function (done) {
+            it('Patch numWrongCellsPlayed query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
                     .query({ numWrongCellsPlayed: 0 })
-                    .set('Content-Type', 'application/json')
-                    .set('Authorization', 'Bearer ' + token)
+                    .send({ numWrongCellsPlayed: 100 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ numWrongCellsPlayed: 100 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle1NumWrongCellsPlayedResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by moves AND query 200 and expected response', function (done) {
+            it('Patch moves AND query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
                     .query({ moves: { puzzleCurrentState: postTestData.puzzle2Move1, puzzleCurrentNotesState: postTestData.puzzle2Notes1} })
-                    .set('Content-Type', 'application/json')
-                    .set('Authorization', 'Bearer ' + token)
+                    .send({ moves: [{ puzzleCurrentState: postTestData.puzzle3Move1, puzzleCurrentNotesState: postTestData.puzzle3Notes1}] })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ moves: { puzzleCurrentState: postTestData.puzzle3Move1, puzzleCurrentNotesState: postTestData.puzzle3Notes1} })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+
+                            res.body[1]._id = "ID";
+                            res.body[1].moves[0]._id = "ID";
+                            res.body[1].moves[1]._id = "ID";
+                        }
+                        console.log(postTestData.activePuzzle3Response);
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesResponse(), postTestData.activePuzzle3Response])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by moves OR query 200 and expected response', function (done) {
+            it('Patch moves OR query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
                     .query({ moves: { puzzleCurrentState: postTestData.puzzle2Move1} },
                         { moves: { puzzleCurrentNotesState: postTestData.puzzle2Notes1}})
-                    .set('Content-Type', 'application/json')
-                    .set('Authorization', 'Bearer ' + token)
+                    .send({ moves: [{ puzzleCurrentState: postTestData.puzzle3Move1, puzzleCurrentNotesState: postTestData.puzzle3Notes1}] })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 2 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ moves: { puzzleCurrentState: postTestData.puzzle3Move1, puzzleCurrentNotesState: postTestData.puzzle3Notes1} })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+
+                            res.body[1]._id = "ID";
+                            res.body[1].moves[0]._id = "ID";
+                            res.body[1].moves[1]._id = "ID";
+
+                            res.body[2]._id = "ID";
+                            res.body[2].moves[0]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesResponse(),
+                        postTestData.activePuzzle3Response, patchTestData.patchActivePuzzle2MovesSwappedResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified2Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by NAKED_SINGLE query 200 and expected response', function (done) {
+            it('Patch NAKED_SINGLE query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
-                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SINGLE': 11 })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SINGLE': 9 })
+                    .send({ 'numWrongCellsPlayedPerStrategy.NAKED_SINGLE': 1000 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SINGLE': 1000 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+                            res.body[0].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesSwappedNAKED_SINGLEResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by HIDDEN_SINGLE query 200 and expected response', function (done) {
+            it('Patch HIDDEN_SINGLE query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
-                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SINGLE': 11 })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SINGLE': 9 })
+                    .send({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SINGLE': 1000 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SINGLE': 1000 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+                            res.body[0].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesSwappedHIDDEN_SINGLEResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by NAKED_PAIR query 200 and expected response', function (done) {
+            it('Patch NAKED_PAIR query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
-                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_PAIR': 11 })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_PAIR': 9 })
+                    .send({ 'numWrongCellsPlayedPerStrategy.NAKED_PAIR': 1000 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_PAIR': 1000 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+                            res.body[0].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesSwappedNAKED_PAIRResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by NAKED_TRIPLET query 200 and expected response', function (done) {
+            it('Patch NAKED_TRIPLET query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
-                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_TRIPLET': 11 })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_TRIPLET': 9 })
+                    .send({ 'numWrongCellsPlayedPerStrategy.NAKED_TRIPLET': 1000 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_TRIPLET': 1000 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+                            res.body[0].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesSwappedNAKED_TRIPLETResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by NAKED_QUADRUPLET query 200 and expected response', function (done) {
+            it('Patch NAKED_QUADRUPLET query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
-                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_QUADRUPLET': 11 })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_QUADRUPLET': 9 })
+                    .send({ 'numWrongCellsPlayedPerStrategy.NAKED_QUADRUPLET': 1000 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_QUADRUPLET': 1000 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+                            res.body[0].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesSwappedNAKED_QUADRUPLETResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by NAKED_QUINTUPLET query 200 and expected response', function (done) {
+            it('Patch NAKED_QUINTUPLET query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
-                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_QUINTUPLET': 11 })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_QUINTUPLET': 9 })
+                    .send({ 'numWrongCellsPlayedPerStrategy.NAKED_QUINTUPLET': 1000 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_QUINTUPLET': 1000 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+                            res.body[0].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesSwappedNAKED_QUINTUPLETResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by NAKED_SEXTUPLET query 200 and expected response', function (done) {
+            it('Patch NAKED_TRIPLET query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
-                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SEXTUPLET': 11 })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SEXTUPLET': 9 })
+                    .send({ 'numWrongCellsPlayedPerStrategy.NAKED_SEXTUPLET': 1000 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SEXTUPLET': 1000 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+                            res.body[0].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesSwappedNAKED_SEXTUPLETResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by NAKED_SEPTUPLET query 200 and expected response', function (done) {
+            it('Patch NAKED_SEPTUPLET query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
-                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SEPTUPLET': 11 })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SEPTUPLET': 9 })
+                    .send({ 'numWrongCellsPlayedPerStrategy.NAKED_SEPTUPLET': 1000 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SEPTUPLET': 1000 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+                            res.body[0].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesSwappedNAKED_SEPTUPLETResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by NAKED_OCTUPLET query 200 and expected response', function (done) {
+            it('Patch NAKED_OCTUPLET query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
-                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_OCTUPLET': 11 })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_OCTUPLET': 9 })
+                    .send({ 'numWrongCellsPlayedPerStrategy.NAKED_OCTUPLET': 1000 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_OCTUPLET': 1000 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+                            res.body[0].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesSwappedNAKED_OCTUPLETResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by HIDDEN_PAIR query 200 and expected response', function (done) {
+            it('Patch HIDDEN_PAIR query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
-                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_PAIR': 11 })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.NAKED_TRIPLET': 9 })
+                    .send({ 'numWrongCellsPlayedPerStrategy.HIDDEN_PAIR': 1000 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_PAIR': 1000 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+                            res.body[0].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesSwappedHIDDEN_PAIRResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by HIDDEN_TRIPLET query 200 and expected response', function (done) {
+            it('Patch HIDDEN_TRIPLET query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
-                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_TRIPLET': 11 })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_TRIPLET': 9 })
+                    .send({ 'numWrongCellsPlayedPerStrategy.HIDDEN_TRIPLET': 1000 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_TRIPLET': 1000 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+                            res.body[0].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesSwappedHIDDEN_TRIPLETResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by HIDDEN_QUADRUPLET query 200 and expected response', function (done) {
+            it('Patch HIDDEN_QUADRUPLET query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
-                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUADRUPLET': 11 })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUADRUPLET': 9 })
+                    .send({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUADRUPLET': 1000 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUADRUPLET': 1000 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+                            res.body[0].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesSwappedHIDDEN_QUADRUPLETResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by HIDDEN_QUINTUPLET query 200 and expected response', function (done) {
+            it('Patch HIDDEN_QUINTUPLET query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
-                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUINTUPLET': 11 })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUINTUPLET': 9 })
+                    .send({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUINTUPLET': 1000 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUINTUPLET': 1000 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+                            res.body[0].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesSwappedHIDDEN_QUINTUPLETResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by HIDDEN_SEXTUPLET query 200 and expected response', function (done) {
+            it('Patch HIDDEN_SEXTUPLET query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
-                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEXTUPLET': 11 })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEXTUPLET': 9 })
+                    .send({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEXTUPLET': 1000 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEXTUPLET': 1000 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+                            res.body[0].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesSwappedHIDDEN_SEXTUPLETResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by HIDDEN_SEPTUPLET query 200 and expected response', function (done) {
+            it('Patch HIDDEN_SEPTUPLET query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
-                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEPTUPLET': 11 })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEPTUPLET': 9 })
+                    .send({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEPTUPLET': 1000 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEPTUPLET': 1000 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+                            res.body[0].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesSwappedHIDDEN_SEPTUPLETResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by HIDDEN_OCTUPLET query 200 and expected response', function (done) {
+            it('Patch HIDDEN_OCTUPLET query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
-                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_OCTUPLET': 11 })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_OCTUPLET': 9 })
+                    .send({ 'numWrongCellsPlayedPerStrategy.HIDDEN_OCTUPLET': 1000 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_OCTUPLET': 1000 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+                            res.body[0].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesSwappedHIDDEN_OCTUPLETResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by POINTING_PAIR query 200 and expected response', function (done) {
+            it('Patch POINTING_PAIR query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
-                    .query({ 'numWrongCellsPlayedPerStrategy.POINTING_PAIR': 11 })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.POINTING_PAIR': 9 })
+                    .send({ 'numWrongCellsPlayedPerStrategy.POINTING_PAIR': 1000 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.POINTING_PAIR': 1000 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+                            res.body[0].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesSwappedPOINTING_PAIRResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by POINTING_TRIPLET query 200 and expected response', function (done) {
+            it('Patch POINTING_TRIPLET query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
-                    .query({ 'numWrongCellsPlayedPerStrategy.POINTING_TRIPLET': 11 })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.POINTING_TRIPLET': 9 })
+                    .send({ 'numWrongCellsPlayedPerStrategy.POINTING_TRIPLET': 1000 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.POINTING_TRIPLET': 1000 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+                            res.body[0].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesSwappedPOINTING_TRIPLETResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by BOX_LINE_REDUCTION query 200 and expected response', function (done) {
+            it('Patch BOX_LINE_REDUCTION query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
-                    .query({ 'numWrongCellsPlayedPerStrategy.BOX_LINE_REDUCTION': 11 })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.BOX_LINE_REDUCTION': 9 })
+                    .send({ 'numWrongCellsPlayedPerStrategy.BOX_LINE_REDUCTION': 1000 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.BOX_LINE_REDUCTION': 1000 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+                            res.body[0].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesSwappedBOX_LINE_REDUCTIONResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by X_WING query 200 and expected response', function (done) {
+            it('Patch X_WING query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
-                    .query({ 'numWrongCellsPlayedPerStrategy.X_WING': 11 })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.X_WING': 9 })
+                    .send({ 'numWrongCellsPlayedPerStrategy.X_WING': 1000 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.X_WING': 1000 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+                            res.body[0].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesSwappedX_WINGResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by SWORDFISH query 200 and expected response', function (done) {
+            it('Patch SWORDFISH query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
-                    .query({ 'numWrongCellsPlayedPerStrategy.SWORDFISH': 11 })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.SWORDFISH': 9 })
+                    .send({ 'numWrongCellsPlayedPerStrategy.SWORDFISH': 1000 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.SWORDFISH': 1000 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+                            res.body[0].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesSwappedSWORDFISHResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch by SINGLES_CHAINING query 200 and expected response', function (done) {
+            it('Patch SINGLES_CHAINING query 200 with currentTime and expected response', function (done) {
+                let patchBody;
                 request
                     .patch('/api/v1/user/activeGames')
-                    .query({ 'numWrongCellsPlayedPerStrategy.SINGLES_CHAINING': 11 })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.SINGLES_CHAINING': 9 })
+                    .send({ 'numWrongCellsPlayedPerStrategy.SINGLES_CHAINING': 1000 })
                     .expect('Content-Type', /json/)
                     .expect(function(res) {
+                        patchBody = res.body;
                     })
-                    .expect(200, { acknowledged: true, deletedCount: 1 })
+                    .end(function(err, res) {
+                    });
+
+                request
+                    .get('/api/v1/user/activeGames')
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .query({ 'numWrongCellsPlayedPerStrategy.SINGLES_CHAINING': 1000 })
+                    .expect('Content-Type', /json/)
+                    .expect(function(res) {
+                        if (res.body[0] != undefined){
+                            res.body[0]._id = "ID";
+                            res.body[0].moves[0]._id = "ID";
+                            res.body[0].moves[1]._id = "ID";
+                        }
+                    })
+                    .expect(200, [patchTestData.patchActivePuzzle2MovesSwappedSINGLES_CHAININGResponse()])
+                    .expect(function(res) {
+                        Assert.equal(JSON.stringify(patchBody), JSON.stringify(patchTestData.modified1Response));
+                    })
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -546,14 +1230,29 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
         });
 
         describe('Test code 200 not present PATCH requests', function () {
-            it('Patch userID is not present returns 200 success message', function (done) {
+            it('Patch body is not present returns 200 success message', function (done) {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ userID: "Jimmy" })
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.noBodyResponse)
+                    .end(function(err, res) {
+                        if (err) return done(err);
+                        return done();
+                    });
+            });
+
+            it('Patch userID is not present returns 200 success message', function (done) {
+                request
+                    .patch('/api/v1/user/activeGames')
+                    .query({ userID: "Jimmy" })
+                    .send({"currentTime": 100})
+                    .set('Content-Type', 'application/json')
+                    .set('Authorization', 'Bearer ' + token)
+                    .expect('Content-Type', /json/)
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -565,10 +1264,11 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ userID: "Jimmy" })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -579,10 +1279,11 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ currentTime: 1000 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -594,10 +1295,11 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ currentTime: 1000 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -609,26 +1311,26 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ currentTime: 1000 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-
-
             it('Patch numHintsAskedFor is not present returns 200 success message', function (done) {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ numHintsAskedFor: 100} )
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -639,52 +1341,56 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ numWrongCellsPlayed: 100} )
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch NAKED_SINGLE is not integer present 200 success message', function (done) {
+            it('Patch NAKED_SINGLE is not present 200 success message', function (done) {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SINGLE': 100 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch HIDDEN_SINGLE is not integer present 200 success message', function (done) {
+            it('Patch HIDDEN_SINGLE is not present 200 success message', function (done) {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SINGLE': 100 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
                     });
             });
 
-            it('Patch NAKED_PAIR is not integer present 200 success message', function (done) {
+            it('Patch NAKED_PAIR is not present 200 success message', function (done) {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ 'numWrongCellsPlayedPerStrategy.NAKED_PAIR': 100 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -695,10 +1401,11 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ 'numWrongCellsPlayedPerStrategy.NAKED_TRIPLET': 100 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -709,10 +1416,11 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ 'numWrongCellsPlayedPerStrategy.NAKED_QUADRUPLET': 100 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -723,10 +1431,11 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ 'numWrongCellsPlayedPerStrategy.NAKED_QUINTUPLET': 100 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -737,10 +1446,11 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SEXTUPLET': 100 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -751,10 +1461,11 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SEPTUPLET': 100 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -765,10 +1476,11 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ 'numWrongCellsPlayedPerStrategy.NAKED_OCTUPLET': 100 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -779,10 +1491,11 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_PAIR': 100 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -793,10 +1506,11 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_TRIPLET': 100 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -807,10 +1521,11 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUADRUPLET': 100 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -821,10 +1536,11 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUINTUPLET': 100 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -835,10 +1551,11 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEXTUPLET': 100 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -849,10 +1566,11 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEPTUPLET': 100 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -863,10 +1581,11 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_OCTUPLET': 100 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -877,10 +1596,11 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ 'numWrongCellsPlayedPerStrategy.POINTING_PAIR': 100 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -891,10 +1611,11 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ 'numWrongCellsPlayedPerStrategy.POINTING_TRIPLET': 100 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -905,10 +1626,11 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ 'numWrongCellsPlayedPerStrategy.BOX_LINE_REDUCTION': 100 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -919,10 +1641,11 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ 'numWrongCellsPlayedPerStrategy.X_WING': 100 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -933,10 +1656,11 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ 'numWrongCellsPlayedPerStrategy.SWORDFISH': 100 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -947,10 +1671,11 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 request
                     .patch('/api/v1/user/activeGames')
                     .query({ 'numWrongCellsPlayedPerStrategy.SINGLES_CHAINING': 100 })
+                    .send({"currentTime": 100})
                     .set('Content-Type', 'application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .expect('Content-Type', /json/)
-                    .expect(200, { acknowledged: true, deletedCount: 0 })
+                    .expect(200, patchTestData.modified0Response)
                     .end(function(err, res) {
                         if (err) return done(err);
                         return done();
@@ -999,7 +1724,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch invalid userID query returns 400 error message', function (done) {
+        it('Patch query invalid userID query returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ userID: ""})
@@ -1013,7 +1738,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch invalid character puzzle query returns 400 error message', function (done) {
+        it('Patch query invalid character puzzle query returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ puzzle: "Banana"})
@@ -1027,7 +1752,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch empty puzzle field returns 400 error message', function (done) {
+        it('Patch query empty puzzle field returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ puzzle: "" })
@@ -1041,7 +1766,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch puzzle too long returns 400 error message', function (done) {
+        it('Patch query puzzle too long returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ puzzle: postTestData.puzzleIsTooLong })
@@ -1055,7 +1780,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch puzzle too short returns 400 error message', function (done) {
+        it('Patch query puzzle too short returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ puzzle: postTestData.puzzleIsTooShort})
@@ -1069,7 +1794,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch puzzle invalid character returns 400 error message', function (done) {
+        it('Patch query puzzle invalid character returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ puzzle: postTestData.puzzleHasInvalidCharacter })
@@ -1083,7 +1808,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch currentTime is not integer returns 400 error message', function (done) {
+        it('Patch query currentTime is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ currentTime: "Banana"} )
@@ -1097,7 +1822,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch puzzleCurrentState is too long returns 400 error message', function (done) {
+        it('Patch query puzzleCurrentState is too long returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ moves: {puzzleCurrentState: postTestData.puzzleCurrentStateIsTooLong} })
@@ -1111,7 +1836,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch puzzleCurrentState is too short returns 400 error message', function (done) {
+        it('Patch query puzzleCurrentState is too short returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ moves: {puzzleCurrentState: postTestData.puzzleCurrentStateIsTooShort} })
@@ -1125,7 +1850,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch puzzleCurrentState has invalid character returns 400 error message', function (done) {
+        it('Patch query puzzleCurrentState has invalid character returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ moves: {puzzleCurrentState: postTestData.puzzleCurrentStateHasInvalidCharacter} })
@@ -1139,7 +1864,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch puzzleCurrentNotesState is too long returns 400 error message', function (done) {
+        it('Patch query puzzleCurrentNotesState is too long returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ moves: {puzzleCurrentNotesState: postTestData.puzzleCurrentNotesStateIsTooLong} })
@@ -1153,8 +1878,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        //todo convert
-        it('Patch puzzleCurrentNotesState is too short returns 400 error message', function (done) {
+        it('Patch query puzzleCurrentNotesState is too short returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ moves: {puzzleCurrentNotesState: postTestData.puzzleCurrentNotesStateIsTooShort} })
@@ -1168,7 +1892,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch puzzleCurrentNotesState has invalid character returns 400 error message', function (done) {
+        it('Patch query puzzleCurrentNotesState has invalid character returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ moves: {puzzleCurrentNotesState: postTestData.puzzleCurrentNotesStateHasInvalidCharacter} })
@@ -1182,7 +1906,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch numHintsAskedFor is not integer returns 400 error message', function (done) {
+        it('Patch query numHintsAskedFor is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ numHintsAskedFor: "Banana"} )
@@ -1196,7 +1920,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch numWrongCellsPlayed is not integer returns 400 error message', function (done) {
+        it('Patch query numWrongCellsPlayed is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ numWrongCellsPlayed: "Banana"} )
@@ -1210,7 +1934,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch NAKED_SINGLE is not integer returns 400 error message', function (done) {
+        it('Patch query NAKED_SINGLE is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SINGLE': "Banana" })
@@ -1224,7 +1948,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch HIDDEN_SINGLE is not integer returns 400 error message', function (done) {
+        it('Patch query HIDDEN_SINGLE is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SINGLE': "Banana" })
@@ -1238,7 +1962,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch NAKED_PAIR is not integer returns 400 error message', function (done) {
+        it('Patch query NAKED_PAIR is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ 'numWrongCellsPlayedPerStrategy.NAKED_PAIR': "Banana" })
@@ -1252,7 +1976,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch NAKED_TRIPLET is not integer returns 400 error message', function (done) {
+        it('Patch query NAKED_TRIPLET is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ 'numWrongCellsPlayedPerStrategy.NAKED_TRIPLET': "Banana" })
@@ -1266,7 +1990,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch NAKED_QUADRUPLET is not integer returns 400 error message', function (done) {
+        it('Patch query NAKED_QUADRUPLET is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ 'numWrongCellsPlayedPerStrategy.NAKED_QUADRUPLET': "Banana" })
@@ -1280,7 +2004,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch NAKED_QUINTUPLET is not integer returns 400 error message', function (done) {
+        it('Patch query NAKED_QUINTUPLET is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ 'numWrongCellsPlayedPerStrategy.NAKED_QUINTUPLET': "Banana" })
@@ -1294,7 +2018,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch NAKED_SEXTUPLET is not integer returns 400 error message', function (done) {
+        it('Patch query NAKED_SEXTUPLET is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SEXTUPLET': "Banana" })
@@ -1308,7 +2032,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch NAKED_SEPTUPLET is not integer returns 400 error message', function (done) {
+        it('Patch query NAKED_SEPTUPLET is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SEPTUPLET': "Banana" })
@@ -1322,7 +2046,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch NAKED_OCTUPLET is not integer returns 400 error message', function (done) {
+        it('Patch query NAKED_OCTUPLET is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ 'numWrongCellsPlayedPerStrategy.NAKED_OCTUPLET': "Banana" })
@@ -1336,7 +2060,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch HIDDEN_PAIR is not integer returns 400 error message', function (done) {
+        it('Patch query HIDDEN_PAIR is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_PAIR': "Banana" })
@@ -1350,7 +2074,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch HIDDEN_TRIPLET is not integer returns 400 error message', function (done) {
+        it('Patch query HIDDEN_TRIPLET is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_TRIPLET': "Banana" })
@@ -1364,7 +2088,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch HIDDEN_QUADRUPLET is not integer returns 400 error message', function (done) {
+        it('Patch query HIDDEN_QUADRUPLET is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUADRUPLET': "Banana" })
@@ -1378,7 +2102,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch HIDDEN_QUINTUPLET is not integer returns 400 error message', function (done) {
+        it('Patch query HIDDEN_QUINTUPLET is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUINTUPLET': "Banana" })
@@ -1392,7 +2116,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch HIDDEN_SEXTUPLET is not integer returns 400 error message', function (done) {
+        it('Patch query HIDDEN_SEXTUPLET is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEXTUPLET': "Banana" })
@@ -1406,7 +2130,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch HIDDEN_SEPTUPLET is not integer returns 400 error message', function (done) {
+        it('Patch query HIDDEN_SEPTUPLET is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEPTUPLET': "Banana" })
@@ -1420,7 +2144,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch HIDDEN_OCTUPLET is not integer returns 400 error message', function (done) {
+        it('Patch query HIDDEN_OCTUPLET is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_OCTUPLET': "Banana" })
@@ -1434,7 +2158,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch POINTING_PAIR is not integer returns 400 error message', function (done) {
+        it('Patch query POINTING_PAIR is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ 'numWrongCellsPlayedPerStrategy.POINTING_PAIR': "Banana" })
@@ -1448,7 +2172,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch POINTING_TRIPLET is not integer returns 400 error message', function (done) {
+        it('Patch query POINTING_TRIPLET is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ 'numWrongCellsPlayedPerStrategy.POINTING_TRIPLET': "Banana" })
@@ -1462,7 +2186,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch BOX_LINE_REDUCTION is not integer returns 400 error message', function (done) {
+        it('Patch query BOX_LINE_REDUCTION is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ 'numWrongCellsPlayedPerStrategy.BOX_LINE_REDUCTION': "Banana" })
@@ -1476,7 +2200,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch X_WING is not integer returns 400 error message', function (done) {
+        it('Patch query X_WING is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ 'numWrongCellsPlayedPerStrategy.X_WING': "Banana" })
@@ -1490,7 +2214,7 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch SWORDFISH is not integer returns 400 error message', function (done) {
+        it('Patch query SWORDFISH is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ 'numWrongCellsPlayedPerStrategy.SWORDFISH': "Banana" })
@@ -1504,10 +2228,468 @@ describe('Test Delete requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Patch SINGLES_CHAINING is not integer returns 400 error message', function (done) {
+        it('Patch query SINGLES_CHAINING is not integer returns 400 error message', function (done) {
             request
                 .patch('/api/v1/user/activeGames')
                 .query({ 'numWrongCellsPlayedPerStrategy.SINGLES_CHAINING': "Banana" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body currentTime is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ currentTime: "Banana"} )
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body puzzleCurrentState is too long returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ moves: [{
+                    "puzzleCurrentState": postTestData.puzzleCurrentStateIsTooLong,
+                    "puzzleCurrentNotesState": postTestData.puzzle2Notes1
+                    }]
+                })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body puzzleCurrentState is too short returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ moves: [{
+                        "puzzleCurrentState": postTestData.puzzleCurrentStateIsTooShort,
+                        "puzzleCurrentNotesState": postTestData.puzzle2Notes1
+                    }]
+                })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body puzzleCurrentState has invalid character returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ moves: [{
+                        "puzzleCurrentState": postTestData.puzzleCurrentStateHasInvalidCharacter,
+                        "puzzleCurrentNotesState": postTestData.puzzle2Notes1
+                    }]
+                })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body puzzleCurrentNotesState is too long returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ moves: [{
+                        "puzzleCurrentState": postTestData.puzzle2Move1,
+                        "puzzleCurrentNotesState": postTestData.puzzleCurrentNotesStateIsTooLong
+                    }]
+                })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body puzzleCurrentNotesState is too short returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ moves: [{
+                        "puzzleCurrentState": postTestData.puzzle2Move1,
+                        "puzzleCurrentNotesState": postTestData.puzzleCurrentNotesStateIsTooShort
+                    }]
+                })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body puzzleCurrentNotesState has invalid character returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ moves: [{
+                        "puzzleCurrentState": postTestData.puzzle2Move1,
+                        "puzzleCurrentNotesState": postTestData.puzzleCurrentNotesStateHasInvalidCharacter
+                    }]
+                })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body numHintsAskedFor is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ numHintsAskedFor: "Banana"} )
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body numWrongCellsPlayed is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ numWrongCellsPlayed: "Banana"} )
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body NAKED_SINGLE is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ 'numWrongCellsPlayedPerStrategy.NAKED_SINGLE': "Banana" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body HIDDEN_SINGLE is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SINGLE': "Banana" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body NAKED_PAIR is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ 'numWrongCellsPlayedPerStrategy.NAKED_PAIR': "Banana" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body NAKED_TRIPLET is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ 'numWrongCellsPlayedPerStrategy.NAKED_TRIPLET': "Banana" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body NAKED_QUADRUPLET is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ 'numWrongCellsPlayedPerStrategy.NAKED_QUADRUPLET': "Banana" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body NAKED_QUINTUPLET is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ 'numWrongCellsPlayedPerStrategy.NAKED_QUINTUPLET': "Banana" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body NAKED_SEXTUPLET is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ 'numWrongCellsPlayedPerStrategy.NAKED_SEXTUPLET': "Banana" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body NAKED_SEPTUPLET is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ 'numWrongCellsPlayedPerStrategy.NAKED_SEPTUPLET': "Banana" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body NAKED_OCTUPLET is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ 'numWrongCellsPlayedPerStrategy.NAKED_OCTUPLET': "Banana" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body HIDDEN_PAIR is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ 'numWrongCellsPlayedPerStrategy.HIDDEN_PAIR': "Banana" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body HIDDEN_TRIPLET is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ 'numWrongCellsPlayedPerStrategy.HIDDEN_TRIPLET': "Banana" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body HIDDEN_QUADRUPLET is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUADRUPLET': "Banana" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body HIDDEN_QUINTUPLET is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUINTUPLET': "Banana" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body HIDDEN_SEXTUPLET is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEXTUPLET': "Banana" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body HIDDEN_SEPTUPLET is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEPTUPLET': "Banana" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body HIDDEN_OCTUPLET is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ 'numWrongCellsPlayedPerStrategy.HIDDEN_OCTUPLET': "Banana" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body POINTING_PAIR is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ 'numWrongCellsPlayedPerStrategy.POINTING_PAIR': "Banana" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body POINTING_TRIPLET is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ 'numWrongCellsPlayedPerStrategy.POINTING_TRIPLET': "Banana" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body BOX_LINE_REDUCTION is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ 'numWrongCellsPlayedPerStrategy.BOX_LINE_REDUCTION': "Banana" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body X_WING is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ 'numWrongCellsPlayedPerStrategy.X_WING': "Banana" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body SWORDFISH is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ 'numWrongCellsPlayedPerStrategy.SWORDFISH': "Banana" })
+                .set('Content-Type', 'application/json')
+                .set('Authorization', 'Bearer ' + token)
+                .expect('Content-Type', /json/)
+                .expect(400, globalTestData.ErrorMessage400)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    return done();
+                });
+        });
+
+        it('Patch body SINGLES_CHAINING is not integer returns 400 error message', function (done) {
+            request
+                .patch('/api/v1/user/activeGames')
+                .send({ 'numWrongCellsPlayedPerStrategy.SINGLES_CHAINING': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
