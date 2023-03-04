@@ -62,9 +62,6 @@ async function updateUserActiveGame(req, res, next) {
 
     const queryData = matchedData(req, { locations: ['query'] });
     const bodyData = matchedData(req, { locations: ['body'] });
-    console.log(bodyData);
-    console.log("__________-");
-    console.log(queryData);
     try {
         res.json(await userActiveGamesService.updateUserActiveGames(bodyData, queryData));
     } catch(err) {
