@@ -65,8 +65,6 @@ class patchTestData {
     static patchActivePuzzle3CurrentTimeResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle3Response;
         patchActivePuzzle1CurrentTimeResponse.currentTime = 2000;
-        console.log(postTestData.activePuzzle3Response);
-        console.log("------------------");
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
