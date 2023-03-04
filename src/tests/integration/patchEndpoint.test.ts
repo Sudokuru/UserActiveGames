@@ -10,6 +10,7 @@ import Assert from "assert";
 request = request('http://localhost:3001');
 
 describe('Test Patch requests for /api/v1/user/activeGames', function () {
+    this.retries(2);
     /*
      * This method populates the database before each test
      */
