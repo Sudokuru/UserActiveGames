@@ -59,15 +59,15 @@ jobs:
       - name: Run API tests
         run: |
           npm ci
-          npm run test:CIintegration
+          npm run test:integration
 
-      - name: Test Reporter
-        uses: dorny/test-reporter@v1
-        if: success() || failure()
-        with:
-          name: Mocha Integration Tests
-          path: test-results.json
-          reporter: mocha-json
+#      - name: Test Reporter
+#        uses: dorny/test-reporter@v1
+#        if: success() || failure()
+#        with:
+#          name: Mocha Integration Tests
+#          path: test-results.json
+#          reporter: mocha-json
 
       - name: Dump mongo logs
         if: failure()
