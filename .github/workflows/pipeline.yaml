@@ -109,8 +109,6 @@ jobs:
           registry: ghcr.io
           tags: "latest,${{ github.run_number }}"
 
-
-
   deploy_documentation:
     name: Deploy Documentation
     if: ${{ github.ref == 'refs/heads/main' }}
