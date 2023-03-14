@@ -75,7 +75,7 @@ jobs:
 
   deploy_docker_image:
     name: Deploy Docker Image
-    if: ${{ github.ref == 'refs/heads/main' }}
+    #if: ${{ github.ref == 'refs/heads/main' }}
     needs: [ test ]
     runs-on: ubuntu-latest
     env:
@@ -121,7 +121,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: latest
           labels: ${{ steps.meta.outputs.labels }}
 
 
