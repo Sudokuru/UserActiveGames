@@ -54,6 +54,7 @@ interface moves {
 export interface userActiveGames {
     userID: string,
     puzzle: string,
+    puzzleSolution: string,
     currentTime: number,
     moves: moves[],
     numHintsAskedFor: number,
