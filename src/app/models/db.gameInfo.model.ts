@@ -27,7 +27,6 @@ const userActiveGamesSchema = new Schema<userActiveGames>({
     moves: [{
         puzzleCurrentState: { type: String, required: false, unique: false },
         puzzleCurrentNotesState: { type: String, required: false, unique: false }
-        // moveTime: { type: Number, required: true }
     }],
     numHintsAskedFor: { type: Number, required: true, default: 0 },
     numWrongCellsPlayed: { type: Number, required: true, default: 0 },
