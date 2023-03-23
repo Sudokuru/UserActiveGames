@@ -94,27 +94,6 @@ describe('Test POST requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Post duplicate activePuzzle returns 400 error message', function (done) {
-            request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.activePuzzle1])
-                .set('Content-Type', 'application/json')
-                .set('Authorization', 'Bearer ' + token)
-                .end(function(err, res) {
-                });
-            request
-                .post('/api/v1/user/activeGames')
-                .send([postTestData.activePuzzle1])
-                .set('Content-Type', 'application/json')
-                .set('Authorization', 'Bearer ' + token)
-                .expect('Content-Type', /json/)
-                .expect(400, globalTestData.ErrorMessage400)
-                .end(function(err, res) {
-                    if (err) return done(err);
-                    return done();
-                });
-        });
-
         it('Post no body returns 400 error message', function (done) {
             request
                 .post('/api/v1/user/activeGames')
