@@ -68,9 +68,9 @@ class patchTestData {
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
-    static patchActivePuzzle1NumHintsAskedForResponse = function(){
+    static patchActivePuzzle1NumHintsUsedResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle1Response;
-        patchActivePuzzle1CurrentTimeResponse.numHintsAskedFor = 100;
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsed = 100;
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
@@ -95,154 +95,154 @@ class patchTestData {
     static patchActivePuzzle2MovesSwappedNAKED_SINGLEResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle2MovesSwappedResponse;
         // @ts-ignore
-        patchActivePuzzle1CurrentTimeResponse.numWrongCellsPlayedPerStrategy = {'NAKED_SINGLE': 1000};
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsedPerStrategy = {'NAKED_SINGLE': 1000};
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
     static patchActivePuzzle2MovesSwappedHIDDEN_SINGLEResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle2MovesSwappedResponse;
         // @ts-ignore
-        patchActivePuzzle1CurrentTimeResponse.numWrongCellsPlayedPerStrategy = {'HIDDEN_SINGLE': 1000};
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsedPerStrategy = {'HIDDEN_SINGLE': 1000};
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
     static patchActivePuzzle2MovesSwappedNAKED_PAIRResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle2MovesSwappedResponse;
         // @ts-ignore
-        patchActivePuzzle1CurrentTimeResponse.numWrongCellsPlayedPerStrategy = {'NAKED_PAIR': 1000};
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsedPerStrategy = {'NAKED_PAIR': 1000};
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
     static patchActivePuzzle2MovesSwappedNAKED_TRIPLETResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle2MovesSwappedResponse;
         // @ts-ignore
-        patchActivePuzzle1CurrentTimeResponse.numWrongCellsPlayedPerStrategy = {'NAKED_TRIPLET': 1000};
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsedPerStrategy = {'NAKED_TRIPLET': 1000};
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
     static patchActivePuzzle2MovesSwappedNAKED_QUADRUPLETResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle2MovesSwappedResponse;
         // @ts-ignore
-        patchActivePuzzle1CurrentTimeResponse.numWrongCellsPlayedPerStrategy = {'NAKED_QUADRUPLET': 1000};
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsedPerStrategy = {'NAKED_QUADRUPLET': 1000};
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
     static patchActivePuzzle2MovesSwappedNAKED_QUINTUPLETResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle2MovesSwappedResponse;
         // @ts-ignore
-        patchActivePuzzle1CurrentTimeResponse.numWrongCellsPlayedPerStrategy = {'NAKED_QUINTUPLET': 1000};
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsedPerStrategy = {'NAKED_QUINTUPLET': 1000};
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
     static patchActivePuzzle2MovesSwappedNAKED_SEXTUPLETResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle2MovesSwappedResponse;
         // @ts-ignore
-        patchActivePuzzle1CurrentTimeResponse.numWrongCellsPlayedPerStrategy = {'NAKED_SEXTUPLET': 1000};
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsedPerStrategy = {'NAKED_SEXTUPLET': 1000};
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
     static patchActivePuzzle2MovesSwappedNAKED_SEPTUPLETResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle2MovesSwappedResponse;
         // @ts-ignore
-        patchActivePuzzle1CurrentTimeResponse.numWrongCellsPlayedPerStrategy = {'NAKED_SEPTUPLET': 1000};
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsedPerStrategy = {'NAKED_SEPTUPLET': 1000};
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
     static patchActivePuzzle2MovesSwappedNAKED_OCTUPLETResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle2MovesSwappedResponse;
         // @ts-ignore
-        patchActivePuzzle1CurrentTimeResponse.numWrongCellsPlayedPerStrategy = {'NAKED_OCTUPLET': 1000};
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsedPerStrategy = {'NAKED_OCTUPLET': 1000};
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
     static patchActivePuzzle2MovesSwappedHIDDEN_PAIRResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle2MovesSwappedResponse;
         // @ts-ignore
-        patchActivePuzzle1CurrentTimeResponse.numWrongCellsPlayedPerStrategy = {'HIDDEN_PAIR': 1000};
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsedPerStrategy = {'HIDDEN_PAIR': 1000};
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
     static patchActivePuzzle2MovesSwappedHIDDEN_TRIPLETResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle2MovesSwappedResponse;
         // @ts-ignore
-        patchActivePuzzle1CurrentTimeResponse.numWrongCellsPlayedPerStrategy = {'HIDDEN_TRIPLET': 1000};
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsedPerStrategy = {'HIDDEN_TRIPLET': 1000};
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
     static patchActivePuzzle2MovesSwappedHIDDEN_QUADRUPLETResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle2MovesSwappedResponse;
         // @ts-ignore
-        patchActivePuzzle1CurrentTimeResponse.numWrongCellsPlayedPerStrategy = {'HIDDEN_QUADRUPLET': 1000};
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsedPerStrategy = {'HIDDEN_QUADRUPLET': 1000};
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
     static patchActivePuzzle2MovesSwappedHIDDEN_QUINTUPLETResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle2MovesSwappedResponse;
         // @ts-ignore
-        patchActivePuzzle1CurrentTimeResponse.numWrongCellsPlayedPerStrategy = {'HIDDEN_QUINTUPLET': 1000};
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsedPerStrategy = {'HIDDEN_QUINTUPLET': 1000};
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
     static patchActivePuzzle2MovesSwappedHIDDEN_SEXTUPLETResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle2MovesSwappedResponse;
         // @ts-ignore
-        patchActivePuzzle1CurrentTimeResponse.numWrongCellsPlayedPerStrategy = {'HIDDEN_SEXTUPLET': 1000};
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsedPerStrategy = {'HIDDEN_SEXTUPLET': 1000};
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
     static patchActivePuzzle2MovesSwappedHIDDEN_SEPTUPLETResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle2MovesSwappedResponse;
         // @ts-ignore
-        patchActivePuzzle1CurrentTimeResponse.numWrongCellsPlayedPerStrategy = {'HIDDEN_SEPTUPLET': 1000};
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsedPerStrategy = {'HIDDEN_SEPTUPLET': 1000};
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
     static patchActivePuzzle2MovesSwappedHIDDEN_OCTUPLETResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle2MovesSwappedResponse;
         // @ts-ignore
-        patchActivePuzzle1CurrentTimeResponse.numWrongCellsPlayedPerStrategy = {'HIDDEN_OCTUPLET': 1000};
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsedPerStrategy = {'HIDDEN_OCTUPLET': 1000};
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
     static patchActivePuzzle2MovesSwappedPOINTING_PAIRResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle2MovesSwappedResponse;
         // @ts-ignore
-        patchActivePuzzle1CurrentTimeResponse.numWrongCellsPlayedPerStrategy = {'POINTING_PAIR': 1000};
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsedPerStrategy = {'POINTING_PAIR': 1000};
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
     static patchActivePuzzle2MovesSwappedPOINTING_TRIPLETResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle2MovesSwappedResponse;
         // @ts-ignore
-        patchActivePuzzle1CurrentTimeResponse.numWrongCellsPlayedPerStrategy = {'POINTING_TRIPLET': 1000};
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsedPerStrategy = {'POINTING_TRIPLET': 1000};
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
     static patchActivePuzzle2MovesSwappedBOX_LINE_REDUCTIONResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle2MovesSwappedResponse;
         // @ts-ignore
-        patchActivePuzzle1CurrentTimeResponse.numWrongCellsPlayedPerStrategy = {'BOX_LINE_REDUCTION': 1000};
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsedPerStrategy = {'BOX_LINE_REDUCTION': 1000};
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
     static patchActivePuzzle2MovesSwappedX_WINGResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle2MovesSwappedResponse;
         // @ts-ignore
-        patchActivePuzzle1CurrentTimeResponse.numWrongCellsPlayedPerStrategy = {'X_WING': 1000};
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsedPerStrategy = {'X_WING': 1000};
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
     static patchActivePuzzle2MovesSwappedSWORDFISHResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle2MovesSwappedResponse;
         // @ts-ignore
-        patchActivePuzzle1CurrentTimeResponse.numWrongCellsPlayedPerStrategy = {'SWORDFISH': 1000};
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsedPerStrategy = {'SWORDFISH': 1000};
         return patchActivePuzzle1CurrentTimeResponse;
     }
 
     static patchActivePuzzle2MovesSwappedSINGLES_CHAININGResponse = function(){
         let patchActivePuzzle1CurrentTimeResponse = postTestData.activePuzzle2MovesSwappedResponse;
         // @ts-ignore
-        patchActivePuzzle1CurrentTimeResponse.numWrongCellsPlayedPerStrategy = {'SINGLES_CHAINING': 1000};
+        patchActivePuzzle1CurrentTimeResponse.numHintsUsedPerStrategy = {'SINGLES_CHAINING': 1000};
         return patchActivePuzzle1CurrentTimeResponse;
     }
 

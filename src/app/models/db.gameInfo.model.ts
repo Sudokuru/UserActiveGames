@@ -23,14 +23,15 @@ const userActiveGamesSchema = new Schema<userActiveGames>({
     userID: { type: String, required: true},
     puzzle: { type: String, required: true},
     puzzleSolution: { type: String, required: true},
+    difficulty: {type: Number, required: true},
     currentTime: { type: Number, required: true, default: 0 },
     moves: [{
         puzzleCurrentState: { type: String, required: false, unique: false },
         puzzleCurrentNotesState: { type: String, required: false, unique: false }
     }],
-    numHintsAskedFor: { type: Number, required: true, default: 0 },
+    numHintsUsed: { type: Number, required: true, default: 0 },
     numWrongCellsPlayed: { type: Number, required: true, default: 0 },
-    numWrongCellsPlayedPerStrategy: {
+    numHintsUsedPerStrategy: {
         NAKED_SINGLE: { type: Number, required: false },
         HIDDEN_SINGLE: { type: Number, required: false },
         NAKED_PAIR: { type: Number, required: false },
