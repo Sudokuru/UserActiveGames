@@ -120,10 +120,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('GET by numHintsAskedFor query 200 and expected response', function (done) {
+        it('GET by numHintsUsed query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ numHintsAskedFor: 0 })
+                .query({ numHintsUsed: 0 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -209,7 +209,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('GET by NAKED_SINGLE query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SINGLE': 11 })
+                .query({ 'numHintsUsedPerStrategy.NAKED_SINGLE': 11 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -230,7 +230,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('GET by HIDDEN_SINGLE query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SINGLE': 11 })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_SINGLE': 11 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -251,7 +251,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('GET by NAKED_PAIR query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_PAIR': 11 })
+                .query({ 'numHintsUsedPerStrategy.NAKED_PAIR': 11 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -272,7 +272,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('GET by NAKED_TRIPLET query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_TRIPLET': 11 })
+                .query({ 'numHintsUsedPerStrategy.NAKED_TRIPLET': 11 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -293,7 +293,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('GET by NAKED_QUADRUPLET query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_QUADRUPLET': 11 })
+                .query({ 'numHintsUsedPerStrategy.NAKED_QUADRUPLET': 11 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -314,7 +314,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('GET by NAKED_QUINTUPLET query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_QUINTUPLET': 11 })
+                .query({ 'numHintsUsedPerStrategy.NAKED_QUINTUPLET': 11 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -335,7 +335,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('GET by NAKED_SEXTUPLET query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SEXTUPLET': 11 })
+                .query({ 'numHintsUsedPerStrategy.NAKED_SEXTUPLET': 11 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -356,7 +356,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('GET by NAKED_SEPTUPLET query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SEPTUPLET': 11 })
+                .query({ 'numHintsUsedPerStrategy.NAKED_SEPTUPLET': 11 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -377,7 +377,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('GET by NAKED_OCTUPLET query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_OCTUPLET': 11 })
+                .query({ 'numHintsUsedPerStrategy.NAKED_OCTUPLET': 11 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -398,7 +398,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('GET by HIDDEN_PAIR query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_PAIR': 11 })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_PAIR': 11 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -419,7 +419,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('GET by HIDDEN_TRIPLET query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_TRIPLET': 11 })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_TRIPLET': 11 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -440,7 +440,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('GET by HIDDEN_QUADRUPLET query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUADRUPLET': 11 })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_QUADRUPLET': 11 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -461,7 +461,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('GET by HIDDEN_QUINTUPLET query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUINTUPLET': 11 })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_QUINTUPLET': 11 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -482,7 +482,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('GET by HIDDEN_SEXTUPLET query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEXTUPLET': 11 })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_SEXTUPLET': 11 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -503,7 +503,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('GET by HIDDEN_SEPTUPLET query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEPTUPLET': 11 })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_SEPTUPLET': 11 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -524,7 +524,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('GET by HIDDEN_OCTUPLET query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_OCTUPLET': 11 })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_OCTUPLET': 11 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -545,7 +545,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('GET by POINTING_PAIR query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.POINTING_PAIR': 11 })
+                .query({ 'numHintsUsedPerStrategy.POINTING_PAIR': 11 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -566,7 +566,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('GET by POINTING_TRIPLET query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.POINTING_TRIPLET': 11 })
+                .query({ 'numHintsUsedPerStrategy.POINTING_TRIPLET': 11 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -587,7 +587,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('GET by BOX_LINE_REDUCTION query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.BOX_LINE_REDUCTION': 11 })
+                .query({ 'numHintsUsedPerStrategy.BOX_LINE_REDUCTION': 11 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -608,7 +608,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('GET by X_WING query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.X_WING': 11 })
+                .query({ 'numHintsUsedPerStrategy.X_WING': 11 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -629,7 +629,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('GET by SWORDFISH query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.SWORDFISH': 11 })
+                .query({ 'numHintsUsedPerStrategy.SWORDFISH': 11 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -650,7 +650,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('GET by SINGLES_CHAINING query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.SINGLES_CHAINING': 11 })
+                .query({ 'numHintsUsedPerStrategy.SINGLES_CHAINING': 11 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -668,32 +668,32 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('GET by numWrongCellsPlayedPerStrategy query 200 and expected response', function (done) {
+        it('GET by numHintsUsedPerStrategy query 200 and expected response', function (done) {
             request
                 .get('/api/v1/user/activeGames')
                 .query(
-                    { 'numWrongCellsPlayedPerStrategy.NAKED_SINGLE': 11 },
-                    { 'numWrongCellsPlayedPerStrategy.HIDDEN_SINGLE': 11 },
-                    { 'numWrongCellsPlayedPerStrategy.NAKED_PAIR': 11 },
-                    { 'numWrongCellsPlayedPerStrategy.NAKED_TRIPLET': 11 },
-                    { 'numWrongCellsPlayedPerStrategy.NAKED_QUADRUPLET': 11 },
-                    { 'numWrongCellsPlayedPerStrategy.NAKED_QUINTUPLET': 11 },
-                    { 'numWrongCellsPlayedPerStrategy.NAKED_SEXTUPLET': 11 },
-                    { 'numWrongCellsPlayedPerStrategy.NAKED_SEPTUPLET': 11 },
-                    { 'numWrongCellsPlayedPerStrategy.NAKED_OCTUPLET': 11 },
-                    { 'numWrongCellsPlayedPerStrategy.HIDDEN_PAIR': 11 },
-                    { 'numWrongCellsPlayedPerStrategy.HIDDEN_TRIPLET': 11 },
-                    { 'numWrongCellsPlayedPerStrategy.HIDDEN_QUADRUPLET': 11 },
-                    { 'numWrongCellsPlayedPerStrategy.HIDDEN_QUINTUPLET': 11 },
-                    { 'numWrongCellsPlayedPerStrategy.HIDDEN_SEXTUPLET': 11 },
-                    { 'numWrongCellsPlayedPerStrategy.HIDDEN_SEPTUPLET': 11 },
-                    { 'numWrongCellsPlayedPerStrategy.HIDDEN_OCTUPLET': 11 },
-                    { 'numWrongCellsPlayedPerStrategy.POINTING_PAIR': 11 },
-                    { 'numWrongCellsPlayedPerStrategy.POINTING_TRIPLET': 11 },
-                    { 'numWrongCellsPlayedPerStrategy.BOX_LINE_REDUCTION': 11 },
-                    { 'numWrongCellsPlayedPerStrategy.X_WING': 11 },
-                    { 'numWrongCellsPlayedPerStrategy.SWORDFISH': 11 },
-                    { 'numWrongCellsPlayedPerStrategy.SINGLES_CHAINING': 11 }
+                    { 'numHintsUsedPerStrategy.NAKED_SINGLE': 11 },
+                    { 'numHintsUsedPerStrategy.HIDDEN_SINGLE': 11 },
+                    { 'numHintsUsedPerStrategy.NAKED_PAIR': 11 },
+                    { 'numHintsUsedPerStrategy.NAKED_TRIPLET': 11 },
+                    { 'numHintsUsedPerStrategy.NAKED_QUADRUPLET': 11 },
+                    { 'numHintsUsedPerStrategy.NAKED_QUINTUPLET': 11 },
+                    { 'numHintsUsedPerStrategy.NAKED_SEXTUPLET': 11 },
+                    { 'numHintsUsedPerStrategy.NAKED_SEPTUPLET': 11 },
+                    { 'numHintsUsedPerStrategy.NAKED_OCTUPLET': 11 },
+                    { 'numHintsUsedPerStrategy.HIDDEN_PAIR': 11 },
+                    { 'numHintsUsedPerStrategy.HIDDEN_TRIPLET': 11 },
+                    { 'numHintsUsedPerStrategy.HIDDEN_QUADRUPLET': 11 },
+                    { 'numHintsUsedPerStrategy.HIDDEN_QUINTUPLET': 11 },
+                    { 'numHintsUsedPerStrategy.HIDDEN_SEXTUPLET': 11 },
+                    { 'numHintsUsedPerStrategy.HIDDEN_SEPTUPLET': 11 },
+                    { 'numHintsUsedPerStrategy.HIDDEN_OCTUPLET': 11 },
+                    { 'numHintsUsedPerStrategy.POINTING_PAIR': 11 },
+                    { 'numHintsUsedPerStrategy.POINTING_TRIPLET': 11 },
+                    { 'numHintsUsedPerStrategy.BOX_LINE_REDUCTION': 11 },
+                    { 'numHintsUsedPerStrategy.X_WING': 11 },
+                    { 'numHintsUsedPerStrategy.SWORDFISH': 11 },
+                    { 'numHintsUsedPerStrategy.SINGLES_CHAINING': 11 }
                 )
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
@@ -936,10 +936,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
                 });
         });
 
-        it('Get numHintsAskedFor is not integer returns 400 error message', function (done) {
+        it('Get numHintsUsed is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ numHintsAskedFor: "Banana"} )
+                .query({ numHintsUsed: "Banana"} )
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -967,7 +967,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get NAKED_SINGLE is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SINGLE': "Banana" })
+                .query({ 'numHintsUsedPerStrategy.NAKED_SINGLE': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -981,7 +981,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get HIDDEN_SINGLE is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SINGLE': "Banana" })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_SINGLE': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -995,7 +995,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get NAKED_PAIR is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_PAIR': "Banana" })
+                .query({ 'numHintsUsedPerStrategy.NAKED_PAIR': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1009,7 +1009,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get NAKED_TRIPLET is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_TRIPLET': "Banana" })
+                .query({ 'numHintsUsedPerStrategy.NAKED_TRIPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1023,7 +1023,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get NAKED_QUADRUPLET is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_QUADRUPLET': "Banana" })
+                .query({ 'numHintsUsedPerStrategy.NAKED_QUADRUPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1037,7 +1037,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get NAKED_QUINTUPLET is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_QUINTUPLET': "Banana" })
+                .query({ 'numHintsUsedPerStrategy.NAKED_QUINTUPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1051,7 +1051,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get NAKED_SEXTUPLET is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SEXTUPLET': "Banana" })
+                .query({ 'numHintsUsedPerStrategy.NAKED_SEXTUPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1065,7 +1065,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get NAKED_SEPTUPLET is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SEPTUPLET': "Banana" })
+                .query({ 'numHintsUsedPerStrategy.NAKED_SEPTUPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1079,7 +1079,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get NAKED_OCTUPLET is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_OCTUPLET': "Banana" })
+                .query({ 'numHintsUsedPerStrategy.NAKED_OCTUPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1093,7 +1093,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get HIDDEN_PAIR is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_PAIR': "Banana" })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_PAIR': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1107,7 +1107,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get HIDDEN_TRIPLET is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_TRIPLET': "Banana" })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_TRIPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1121,7 +1121,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get HIDDEN_QUADRUPLET is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUADRUPLET': "Banana" })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_QUADRUPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1135,7 +1135,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get HIDDEN_QUINTUPLET is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUINTUPLET': "Banana" })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_QUINTUPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1149,7 +1149,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get HIDDEN_SEXTUPLET is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEXTUPLET': "Banana" })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_SEXTUPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1163,7 +1163,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get HIDDEN_SEPTUPLET is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEPTUPLET': "Banana" })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_SEPTUPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1177,7 +1177,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get HIDDEN_OCTUPLET is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_OCTUPLET': "Banana" })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_OCTUPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1191,7 +1191,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get POINTING_PAIR is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.POINTING_PAIR': "Banana" })
+                .query({ 'numHintsUsedPerStrategy.POINTING_PAIR': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1205,7 +1205,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get POINTING_TRIPLET is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.POINTING_TRIPLET': "Banana" })
+                .query({ 'numHintsUsedPerStrategy.POINTING_TRIPLET': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1219,7 +1219,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get BOX_LINE_REDUCTION is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.BOX_LINE_REDUCTION': "Banana" })
+                .query({ 'numHintsUsedPerStrategy.BOX_LINE_REDUCTION': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1233,7 +1233,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get X_WING is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.X_WING': "Banana" })
+                .query({ 'numHintsUsedPerStrategy.X_WING': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1247,7 +1247,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get SWORDFISH is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.SWORDFISH': "Banana" })
+                .query({ 'numHintsUsedPerStrategy.SWORDFISH': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1261,7 +1261,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get SINGLES_CHAINING is not integer returns 400 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.SINGLES_CHAINING': "Banana" })
+                .query({ 'numHintsUsedPerStrategy.SINGLES_CHAINING': "Banana" })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1389,10 +1389,10 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
 
 
 
-        it('Get numHintsAskedFor is not present returns 404 error message', function (done) {
+        it('Get numHintsUsed is not present returns 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ numHintsAskedFor: 100} )
+                .query({ numHintsUsed: 100} )
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1420,7 +1420,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get NAKED_SINGLE is not integer present 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SINGLE': 100 })
+                .query({ 'numHintsUsedPerStrategy.NAKED_SINGLE': 100 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1434,7 +1434,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get HIDDEN_SINGLE is not integer present 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SINGLE': 100 })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_SINGLE': 100 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1448,7 +1448,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get NAKED_PAIR is not integer present 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_PAIR': 100 })
+                .query({ 'numHintsUsedPerStrategy.NAKED_PAIR': 100 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1462,7 +1462,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get NAKED_TRIPLET is not present returns 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_TRIPLET': 100 })
+                .query({ 'numHintsUsedPerStrategy.NAKED_TRIPLET': 100 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1476,7 +1476,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get NAKED_QUADRUPLET is not present returns 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_QUADRUPLET': 100 })
+                .query({ 'numHintsUsedPerStrategy.NAKED_QUADRUPLET': 100 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1490,7 +1490,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get NAKED_QUINTUPLET is not present returns 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_QUINTUPLET': 100 })
+                .query({ 'numHintsUsedPerStrategy.NAKED_QUINTUPLET': 100 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1504,7 +1504,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get NAKED_SEXTUPLET is not present returns 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SEXTUPLET': 100 })
+                .query({ 'numHintsUsedPerStrategy.NAKED_SEXTUPLET': 100 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1518,7 +1518,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get NAKED_SEPTUPLET is not present returns 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_SEPTUPLET': 100 })
+                .query({ 'numHintsUsedPerStrategy.NAKED_SEPTUPLET': 100 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1532,7 +1532,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get NAKED_OCTUPLET is not present returns 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.NAKED_OCTUPLET': 100 })
+                .query({ 'numHintsUsedPerStrategy.NAKED_OCTUPLET': 100 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1546,7 +1546,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get HIDDEN_PAIR is not present returns 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_PAIR': 100 })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_PAIR': 100 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1560,7 +1560,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get HIDDEN_TRIPLET is not present returns 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_TRIPLET': 100 })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_TRIPLET': 100 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1574,7 +1574,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get HIDDEN_QUADRUPLET is not present returns 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUADRUPLET': 100 })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_QUADRUPLET': 100 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1588,7 +1588,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get HIDDEN_QUINTUPLET is not present returns 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_QUINTUPLET': 100 })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_QUINTUPLET': 100 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1602,7 +1602,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get HIDDEN_SEXTUPLET is not present returns 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEXTUPLET': 100 })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_SEXTUPLET': 100 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1616,7 +1616,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get HIDDEN_SEPTUPLET is not present returns 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_SEPTUPLET': 100 })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_SEPTUPLET': 100 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1630,7 +1630,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get HIDDEN_OCTUPLET is not present returns 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.HIDDEN_OCTUPLET': 100 })
+                .query({ 'numHintsUsedPerStrategy.HIDDEN_OCTUPLET': 100 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1644,7 +1644,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get POINTING_PAIR is not present returns 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.POINTING_PAIR': 100 })
+                .query({ 'numHintsUsedPerStrategy.POINTING_PAIR': 100 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1658,7 +1658,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get POINTING_TRIPLET is not present returns 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.POINTING_TRIPLET': 100 })
+                .query({ 'numHintsUsedPerStrategy.POINTING_TRIPLET': 100 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1672,7 +1672,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get BOX_LINE_REDUCTION is not present returns 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.BOX_LINE_REDUCTION': 100 })
+                .query({ 'numHintsUsedPerStrategy.BOX_LINE_REDUCTION': 100 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1686,7 +1686,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get X_WING is not present returns 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.X_WING': 100 })
+                .query({ 'numHintsUsedPerStrategy.X_WING': 100 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1700,7 +1700,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get SWORDFISH is not present returns 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.SWORDFISH': 100 })
+                .query({ 'numHintsUsedPerStrategy.SWORDFISH': 100 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)
@@ -1714,7 +1714,7 @@ describe('Test GET requests for /api/v1/user/activeGames', function () {
         it('Get SINGLES_CHAINING is not present returns 404 error message', function (done) {
             request
                 .get('/api/v1/user/activeGames')
-                .query({ 'numWrongCellsPlayedPerStrategy.SINGLES_CHAINING': 100 })
+                .query({ 'numHintsUsedPerStrategy.SINGLES_CHAINING': 100 })
                 .set('Content-Type', 'application/json')
                 .set('Authorization', 'Bearer ' + token)
                 .expect('Content-Type', /json/)

@@ -41,15 +41,17 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10
     };
 
     static activePuzzle1Response = {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
         "currentTime": 0,
         "moves": [],
-        "numHintsAskedFor": 0,
+        "numHintsUsed": 0,
         "numWrongCellsPlayed": 0,
         "_id": "ID",
         "__v": 0
@@ -59,6 +61,7 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle2,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
         "currentTime": 255,
         "moves": [{
             "puzzleCurrentState": postTestData.puzzle2Move1,
@@ -67,9 +70,9 @@ class postTestData {
             "puzzleCurrentState": postTestData.puzzle2Move2,
             "puzzleCurrentNotesState": postTestData.puzzle2Notes2
         }],
-        "numHintsAskedFor": 2,
+        "numHintsUsed": 2,
         "numWrongCellsPlayed": 2,
-        "numWrongCellsPlayedPerStrategy": {
+        "numHintsUsedPerStrategy": {
             "NAKED_SINGLE": 11,
             "HIDDEN_SINGLE": 11,
             "NAKED_PAIR": 11,
@@ -99,6 +102,7 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle2,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
         "currentTime": 255,
         "moves": [{
             "puzzleCurrentState": postTestData.puzzle2Move1,
@@ -109,9 +113,9 @@ class postTestData {
             "puzzleCurrentNotesState": postTestData.puzzle2Notes2,
             "_id": "ID"
         }],
-        "numHintsAskedFor": 2,
+        "numHintsUsed": 2,
         "numWrongCellsPlayed": 2,
-        "numWrongCellsPlayedPerStrategy": {
+        "numHintsUsedPerStrategy": {
             "NAKED_SINGLE": 11,
             "HIDDEN_SINGLE": 11,
             "NAKED_PAIR": 11,
@@ -143,6 +147,7 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle2MovesSwapped,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
         "currentTime": 255,
         "moves": [{
             "puzzleCurrentState": postTestData.puzzle2Move2,
@@ -151,9 +156,9 @@ class postTestData {
             "puzzleCurrentState": postTestData.puzzle2Move1,
             "puzzleCurrentNotesState": postTestData.puzzle2Notes2,
         }],
-        "numHintsAskedFor": 2,
+        "numHintsUsed": 2,
         "numWrongCellsPlayed": 2,
-        "numWrongCellsPlayedPerStrategy": {
+        "numHintsUsedPerStrategy": {
             "NAKED_SINGLE": 9,
             "HIDDEN_SINGLE": 9,
             "NAKED_PAIR": 9,
@@ -183,6 +188,7 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle2MovesSwapped,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
         "currentTime": 255,
         "moves": [{
             "puzzleCurrentState": postTestData.puzzle2Move2,
@@ -193,9 +199,9 @@ class postTestData {
             "puzzleCurrentNotesState": postTestData.puzzle2Notes2,
             "_id": "ID"
         }],
-        "numHintsAskedFor": 2,
+        "numHintsUsed": 2,
         "numWrongCellsPlayed": 2,
-        "numWrongCellsPlayedPerStrategy": {
+        "numHintsUsedPerStrategy": {
             "NAKED_SINGLE": 9,
             "HIDDEN_SINGLE": 9,
             "NAKED_PAIR": 9,
@@ -227,6 +233,7 @@ class postTestData {
         "userID": postTestData.userName2,
         "puzzle": postTestData.puzzle3,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
         "currentTime": 500,
         "moves": [{
             "puzzleCurrentState": postTestData.puzzle3Move1,
@@ -235,9 +242,9 @@ class postTestData {
             "puzzleCurrentState": postTestData.puzzle3Move2,
             "puzzleCurrentNotesState": postTestData.puzzle3Notes2
         }],
-        "numHintsAskedFor": 2,
+        "numHintsUsed": 2,
         "numWrongCellsPlayed": 2,
-        "numWrongCellsPlayedPerStrategy": {
+        "numHintsUsedPerStrategy": {
             "NAKED_SINGLE": 5,
             "HIDDEN_SINGLE": 2,
             "POINTING_PAIR": 0,
@@ -253,6 +260,7 @@ class postTestData {
         "userID": postTestData.userName2,
         "puzzle": postTestData.puzzle3,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
         "currentTime": 500,
         "moves": [{
             "puzzleCurrentState": postTestData.puzzle3Move1,
@@ -263,9 +271,9 @@ class postTestData {
             "puzzleCurrentNotesState": postTestData.puzzle3Notes2,
             "_id": "ID"
         }],
-        "numHintsAskedFor": 2,
+        "numHintsUsed": 2,
         "numWrongCellsPlayed": 2,
-        "numWrongCellsPlayedPerStrategy": {
+        "numHintsUsedPerStrategy": {
             "NAKED_SINGLE": 5,
             "HIDDEN_SINGLE": 2,
             "POINTING_PAIR": 0,
@@ -286,53 +294,62 @@ class postTestData {
     static postUserIDNotPresent = {
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
     };
 
     static postUserIDBlank = {
         "userID": "",
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
     };
 
     static postUserIDIsInt = {
         "userID": 5,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
     };
 
     static postPuzzleNotPresent = {
         "userID": postTestData.userName1,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
     };
 
     static postPuzzleBlank = {
         "userID": postTestData.userName1,
         "puzzle": "",
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
     };
 
     static postPuzzleIsTooLong = {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzleIsTooLong,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
     };
 
     static postPuzzleIsTooShort = {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzleIsTooShort,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
     };
 
     static postPuzzleHasInvalidCharacter = {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzleHasInvalidCharacter,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
     };
 
     static postCurrentTimeIsNotInteger = {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
         "currentTime": "Banana"
     };
 
@@ -340,6 +357,7 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
         "moves": [{
             "puzzleCurrentState": postTestData.puzzleCurrentStateIsTooLong
         }]
@@ -349,6 +367,7 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
         "moves": [{
             "puzzleCurrentState": postTestData.puzzleCurrentStateIsTooShort
         }]
@@ -358,6 +377,7 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
         "moves": [{
             "puzzleCurrentState": postTestData.puzzleCurrentStateHasInvalidCharacter
         }]
@@ -367,6 +387,7 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
         "moves": [{
             "puzzleCurrentNotesState": postTestData.puzzleCurrentNotesStateIsTooLong,
         }]
@@ -376,6 +397,7 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
         "moves": [{
             "puzzleCurrentNotesState": postTestData.puzzleCurrentNotesStateIsTooShort,
         }]
@@ -385,6 +407,7 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
         "moves": [{
             "puzzleCurrentNotesState": postTestData.puzzleCurrentNotesStateHasInvalidCharacter,
         }]
@@ -394,13 +417,15 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numHintsAskedFor": "Banana"
+        "difficulty": 10,
+        "numHintsUsed": "Banana"
     };
 
     static postNumWrongCellsPlayedIsNotInteger = {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
+        "difficulty": 10,
         "numWrongCellsPlayed": "Banana"
     };
 
@@ -408,7 +433,8 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numWrongCellsPlayedPerStrategy": {
+        "difficulty": 10,
+        "numHintsUsedPerStrategy": {
             "NAKED_SINGLE": "B"
         }
     };
@@ -417,7 +443,8 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numWrongCellsPlayedPerStrategy": {
+        "difficulty": 10,
+        "numHintsUsedPerStrategy": {
             "HIDDEN_SINGLE": "B"
         }
     };
@@ -426,7 +453,8 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numWrongCellsPlayedPerStrategy": {
+        "difficulty": 10,
+        "numHintsUsedPerStrategy": {
             "NAKED_PAIR": "B"
         }
     };
@@ -435,7 +463,8 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numWrongCellsPlayedPerStrategy": {
+        "difficulty": 10,
+        "numHintsUsedPerStrategy": {
             "NAKED_TRIPLET": "B"
         }
     };
@@ -444,7 +473,8 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numWrongCellsPlayedPerStrategy": {
+        "difficulty": 10,
+        "numHintsUsedPerStrategy": {
             "NAKED_QUADRUPLET": "B"
         }
     };
@@ -453,7 +483,8 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numWrongCellsPlayedPerStrategy": {
+        "difficulty": 10,
+        "numHintsUsedPerStrategy": {
             "NAKED_QUINTUPLET": "B"
         }
     };
@@ -461,7 +492,8 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numWrongCellsPlayedPerStrategy": {
+        "difficulty": 10,
+        "numHintsUsedPerStrategy": {
             "NAKED_SEXTUPLET": "B"
         }
     };
@@ -470,7 +502,8 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numWrongCellsPlayedPerStrategy": {
+        "difficulty": 10,
+        "numHintsUsedPerStrategy": {
             "NAKED_SEPTUPLET": "B"
         }
     };
@@ -479,7 +512,8 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numWrongCellsPlayedPerStrategy": {
+        "difficulty": 10,
+        "numHintsUsedPerStrategy": {
             "NAKED_OCTUPLET": "B"
         }
     };
@@ -488,7 +522,8 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numWrongCellsPlayedPerStrategy": {
+        "difficulty": 10,
+        "numHintsUsedPerStrategy": {
             "HIDDEN_PAIR": "B"
         }
     };
@@ -497,7 +532,8 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numWrongCellsPlayedPerStrategy": {
+        "difficulty": 10,
+        "numHintsUsedPerStrategy": {
             "HIDDEN_TRIPLET": "B"
         }
     };
@@ -506,7 +542,8 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numWrongCellsPlayedPerStrategy": {
+        "difficulty": 10,
+        "numHintsUsedPerStrategy": {
             "HIDDEN_QUADRUPLET": "B"
         }
     };
@@ -515,7 +552,8 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numWrongCellsPlayedPerStrategy": {
+        "difficulty": 10,
+        "numHintsUsedPerStrategy": {
             "HIDDEN_QUINTUPLET": "B"
         }
     };
@@ -524,7 +562,8 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numWrongCellsPlayedPerStrategy": {
+        "difficulty": 10,
+        "numHintsUsedPerStrategy": {
             "HIDDEN_SEXTUPLET": "B"
         }
     };
@@ -533,7 +572,8 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numWrongCellsPlayedPerStrategy": {
+        "difficulty": 10,
+        "numHintsUsedPerStrategy": {
             "HIDDEN_SEPTUPLET": "B"
         }
     };
@@ -542,7 +582,8 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numWrongCellsPlayedPerStrategy": {
+        "difficulty": 10,
+        "numHintsUsedPerStrategy": {
             "HIDDEN_OCTUPLET": "B"
         }
     };
@@ -551,7 +592,8 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numWrongCellsPlayedPerStrategy": {
+        "difficulty": 10,
+        "numHintsUsedPerStrategy": {
             "POINTING_PAIR": "B"
         }
     };
@@ -560,7 +602,8 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numWrongCellsPlayedPerStrategy": {
+        "difficulty": 10,
+        "numHintsUsedPerStrategy": {
             "POINTING_TRIPLET": "B"
         }
     };
@@ -569,7 +612,8 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numWrongCellsPlayedPerStrategy": {
+        "difficulty": 10,
+        "numHintsUsedPerStrategy": {
             "BOX_LINE_REDUCTION": "B"
         }
     };
@@ -578,7 +622,8 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numWrongCellsPlayedPerStrategy": {
+        "difficulty": 10,
+        "numHintsUsedPerStrategy": {
             "X_WING": "B"
         }
     };
@@ -587,7 +632,8 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numWrongCellsPlayedPerStrategy": {
+        "difficulty": 10,
+        "numHintsUsedPerStrategy": {
             "SWORDFISH": "B"
         }
     };
@@ -596,7 +642,8 @@ class postTestData {
         "userID": postTestData.userName1,
         "puzzle": postTestData.puzzle1,
         "puzzleSolution": postTestData.puzzle1Solution,
-        "numWrongCellsPlayedPerStrategy": {
+        "difficulty": 10,
+        "numHintsUsedPerStrategy": {
             "SINGLES_CHAINING": "B"
         }
     };
@@ -606,6 +653,7 @@ class postTestData {
             "userID": postTestData.userName1,
             "puzzle": postTestData.puzzle2MovesSwapped,
             "puzzleSolution": postTestData.puzzle1Solution,
+            "difficulty": 10,
             "currentTime": 255,
             "moves": [{
                 "puzzleCurrentState": postTestData.puzzle2Move2,
@@ -616,9 +664,9 @@ class postTestData {
                 "puzzleCurrentNotesState": postTestData.puzzle2Notes2,
                 "_id": "ID"
             }],
-            "numHintsAskedFor": 2,
+            "numHintsUsed": 2,
             "numWrongCellsPlayed": 2,
-            "numWrongCellsPlayedPerStrategy": {
+            "numHintsUsedPerStrategy": {
                 "NAKED_SINGLE": 9,
                 "HIDDEN_SINGLE": 9,
                 "NAKED_PAIR": 9,
@@ -650,6 +698,7 @@ class postTestData {
             "userID": postTestData.userName1,
             "puzzle": postTestData.puzzle2,
             "puzzleSolution": postTestData.puzzle1Solution,
+            "difficulty": 10,
             "currentTime": 255,
             "moves": [{
                 "puzzleCurrentState": postTestData.puzzle2Move1,
@@ -660,9 +709,9 @@ class postTestData {
                 "puzzleCurrentNotesState": postTestData.puzzle2Notes2,
                 "_id": "ID"
             }],
-            "numHintsAskedFor": 2,
+            "numHintsUsed": 2,
             "numWrongCellsPlayed": 2,
-            "numWrongCellsPlayedPerStrategy": {
+            "numHintsUsedPerStrategy": {
                 "NAKED_SINGLE": 11,
                 "HIDDEN_SINGLE": 11,
                 "NAKED_PAIR": 11,
@@ -694,9 +743,10 @@ class postTestData {
             "userID": postTestData.userName1,
             "puzzle": postTestData.puzzle1,
             "puzzleSolution": postTestData.puzzle1Solution,
+            "difficulty": 10,
             "currentTime": 0,
             "moves": [],
-            "numHintsAskedFor": 0,
+            "numHintsUsed": 0,
             "numWrongCellsPlayed": 0,
             "_id": "ID",
             "__v": 0
@@ -706,6 +756,7 @@ class postTestData {
             "userID": postTestData.userName2,
             "puzzle": postTestData.puzzle3,
             "puzzleSolution": postTestData.puzzle1Solution,
+            "difficulty": 10,
             "currentTime": 500,
             "moves": [{
                 "puzzleCurrentState": postTestData.puzzle3Move1,
@@ -716,9 +767,9 @@ class postTestData {
                 "puzzleCurrentNotesState": postTestData.puzzle3Notes2,
                 "_id": "ID"
             }],
-            "numHintsAskedFor": 2,
+            "numHintsUsed": 2,
             "numWrongCellsPlayed": 2,
-            "numWrongCellsPlayedPerStrategy": {
+            "numHintsUsedPerStrategy": {
                 "NAKED_SINGLE": 5,
                 "HIDDEN_SINGLE": 2,
                 "POINTING_PAIR": 0,
