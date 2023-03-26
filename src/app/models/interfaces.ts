@@ -55,9 +55,10 @@ export interface userActiveGames {
     userID: string,
     puzzle: string,
     puzzleSolution: string,
+    difficulty: number,
     currentTime: number,
     moves: moves[],
-    numHintsAskedFor: number,
+    numHintsUsed: number,
     numWrongCellsPlayed: number,
-    numWrongCellsPlayedPerStrategy: numWrongCellsPlayedPerStrategy
+    numHintsUsedPerStrategy: numWrongCellsPlayedPerStrategy
 }
